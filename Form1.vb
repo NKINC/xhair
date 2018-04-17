@@ -4,7 +4,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Windows.Forms
 
 Public Class Form1
-    'Adjust the offsets for different screen sizes - current settings are for 1920x1080 resolution
+    'Adjust the offsets for different screen sizes and games - current settings are for 1920x1080 resolution
     Public offsetX As Integer = -7, offsetY As Integer = -8
     Public lineWidth As Single = 1
     Public lineWidthArc As Single = 1
@@ -37,6 +37,7 @@ Public Class Form1
 
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         Try
+            ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
             If pauseDrawing = False Or Control.IsKeyLocked(Keys.NumLock) = True Then
                 baseColor1 = Color.FromArgb(eclipseBrushTransparency, baseColor1.R, baseColor1.G, baseColor1.B)
                 Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
