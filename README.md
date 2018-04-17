@@ -1,2 +1,2 @@
 # xhair
-Paints a cross hair on center of screen for gaming (Windowed and Full Screen)
+Paints a dot on center of screen for gaming (Windowed and Full Screen)
