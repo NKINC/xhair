@@ -41,9 +41,9 @@ Public Class Form1
             If pauseDrawing = False Or Control.IsKeyLocked(Keys.NumLock) = True Then
                 baseColor1 = Color.FromArgb(eclipseBrushTransparency, baseColor1.R, baseColor1.G, baseColor1.B)
                 Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
-                    Dim pts As New List(Of PointF)
                     Try
-                        g.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                        ' SET IMAGE SETTINGS
+                        g.CompositingQuality = Drawing2D.CompositingQuality.AssumeLinear
                         g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                         g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
                         g.PixelOffsetMode = PixelOffsetMode.HighQuality
@@ -56,32 +56,34 @@ Public Class Form1
                         Dim colorOfScreenPixel As Color = Color.FromArgb(255, Bmp.GetPixel(0, 0))
 
                         Dim eclipseBrushColor As Color = baseColor1
-                        If CInt(colorOfScreenPixel.R) >= 196 And CInt(colorOfScreenPixel.G) >= 196 And CInt(colorOfScreenPixel.B >= 196) Then 'white
-                            eclipseBrushColor = Color.Red
-                        ElseIf CInt(colorOfScreenPixel.R) >= 196 And CInt(colorOfScreenPixel.G) >= 196 And CInt(colorOfScreenPixel.B) <= 128 Then 'yellow
-                            eclipseBrushColor = Color.Black
-                        End If
 
-                        ' DRAW SOLID CIRCLE
+                        ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
                         eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushTransparency, eclipseBrushColor.R, eclipseBrushColor.G, eclipseBrushColor.B))
                         g.FillEllipse(eclipseBrush, CSng((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter / 2), CSng((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter / 2), eclipseDiameter, eclipseDiameter)
-                        g.Dispose()
 
-                        ''VERTICAL CROSSHAIR LINE
-                        'Dim verticalLength As Integer = 6 '24
-                        'pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) - verticalLength + offsetY))
-                        'pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) + verticalLength + offsetY)) 'Me.LineShape1.EndPoint = 
+                        'Try
+                        '   CROSSHAIRS
+                        '   Dim pts As New List(Of PointF)
+                        ''  VERTICAL CROSSHAIR LINE
+                        '   Dim verticalLength As Integer = 6 '24
+                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) - verticalLength + offsetY))
+                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) + verticalLength + offsetY)) 'Me.LineShape1.EndPoint = 
 
-                        ''HORIZONTAL CROSSHAIR LINE
-                        'pts.Add(New PointF((Me.ClientRectangle.Width / 2) - verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
-                        'pts.Add(New PointF((Me.ClientRectangle.Width / 2) + verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
-                        'eclipsePen = New Pen(eclipseBrush)
-                        'eclipsePen.Width = lineWidth
-                        'g.DrawLine(eclipsePen, pts(0), pts(1))
-                        'g.DrawLine(eclipsePen, pts(2), pts(3))
+                        ''  HORIZONTAL CROSSHAIR LINE
+                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) - verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
+                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
+                        '   eclipsePen = New Pen(eclipseBrush)
+                        '   eclipsePen.Width = lineWidth
+                        '   g.DrawLine(eclipsePen, pts(0), pts(1))
+                        '   g.DrawLine(eclipsePen, pts(2), pts(3))
+                        'Catch ex As Exception
+                        '    Err.Clear()
+                        'End Try
 
                     Catch ex As Exception
                         Err.Clear()
+                    Finally
+                        g.Dispose()
                     End Try
                 End Using
             End If
