@@ -9,11 +9,11 @@ Public Class Form1
     Public lineWidth As Single = 1
     Public lineWidthArc As Single = 1
     Public timerInterval As Integer = 1
-    Public eclipseDiameter As Single = 3.0F
-    Public eclipseBrushTransparency As Integer = 255
+    Public eclipseDiameter As Single = 4.0F
+    Public eclipseBrushTransparency As Integer = 255 '255
     Public eclipseBrushColorOffset As Integer = 64
     Public eclipseDiameterQuantifier As Integer = 7
-    Public baseColor1 As Color = Color.White
+    Public baseColor1 As Color = Color.Red
     Public eclipseBrush As SolidBrush = Nothing
     Public eclipsePen As System.Drawing.Pen = New Pen(baseColor1)
     Public pauseDrawing As Boolean = True
@@ -34,10 +34,13 @@ Public Class Form1
             Me.Invalidate()
         End Try
     End Sub
-
+    'Dim timeout As Integer = 10
+    'Dim timeOutTime As DateTime = DateTime.Now
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         Try
             ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
+            'If True = True Then 'If timeOutTime.AddMilliseconds(timeout) <= DateTime.Now Then '
+
             If pauseDrawing = False Or Control.IsKeyLocked(Keys.NumLock) = True Then
                 baseColor1 = Color.FromArgb(eclipseBrushTransparency, baseColor1.R, baseColor1.G, baseColor1.B)
                 Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
@@ -56,9 +59,8 @@ Public Class Form1
                         Dim colorOfScreenPixel As Color = Color.FromArgb(255, Bmp.GetPixel(0, 0))
 
                         Dim eclipseBrushColor As Color = baseColor1
-
                         ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
-                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushTransparency, eclipseBrushColor.R, eclipseBrushColor.G, eclipseBrushColor.B))
+                        eclipseBrush = New SolidBrush(Color.FromArgb(CInt(eclipseBrushTransparency), eclipseBrushColor))
                         g.FillEllipse(eclipseBrush, CSng((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter / 2), CSng((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter / 2), eclipseDiameter, eclipseDiameter)
 
                         'Try
@@ -79,7 +81,7 @@ Public Class Form1
                         'Catch ex As Exception
                         '    Err.Clear()
                         'End Try
-
+                        'Application.DoEvents()
                     Catch ex As Exception
                         Err.Clear()
                     Finally
@@ -87,6 +89,8 @@ Public Class Form1
                     End Try
                 End Using
             End If
+            'timeOutTime = DateTime.Now
+            'End If
             Return
         Catch ex As Exception
             Err.Clear()
