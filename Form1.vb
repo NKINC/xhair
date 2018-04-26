@@ -9,13 +9,16 @@ Public Class Form1
     Public lineWidth As Single = 1
     Public lineWidthArc As Single = 1
     Public timerInterval As Integer = 1
-    Public eclipseDiameter As Single = 4.0F
+    Public eclipseDiameter As Single = 4.5F
     Public eclipseBrushTransparency As Integer = 255 '255
     Public eclipseBrushColorOffset As Integer = 64
     Public eclipseDiameterQuantifier As Integer = 7
-    Public baseColor1 As Color = Color.Red
+    Public baseColor1 As Color = Color.FromArgb(255, 255, 154, 2)
+    'Public baseColor1 As Color = Color.FromArgb(eclipseBrushTransparency, Color.Red)
+    'Public baseColor2 As Color = Color.FromArgb(255, 255, 154, 2)
+    Public baseColor2 As Color = Color.FromArgb(255, 0, 0, 0)
     Public eclipseBrush As SolidBrush = Nothing
-    Public eclipsePen As System.Drawing.Pen = New Pen(baseColor1)
+    Public eclipsePen As System.Drawing.Pen = New Pen(baseColor2)
     Public pauseDrawing As Boolean = True
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -40,9 +43,8 @@ Public Class Form1
         Try
             ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
             'If True = True Then 'If timeOutTime.AddMilliseconds(timeout) <= DateTime.Now Then '
-
             If pauseDrawing = False Or Control.IsKeyLocked(Keys.NumLock) = True Then
-                baseColor1 = Color.FromArgb(eclipseBrushTransparency, baseColor1.R, baseColor1.G, baseColor1.B)
+                baseColor1 = Color.FromArgb(eclipseBrushTransparency, baseColor1)
                 Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
                     Try
                         ' SET IMAGE SETTINGS
@@ -58,26 +60,37 @@ Public Class Form1
                         gTemp.CopyFromScreen(New Point(CInt((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter / 2), CInt((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter / 2)), New Point(0, 0), Bmp.Size)
                         Dim colorOfScreenPixel As Color = Color.FromArgb(255, Bmp.GetPixel(0, 0))
 
-                        Dim eclipseBrushColor As Color = baseColor1
+                        'Dim eclipseBrushColor As Color = baseColor1
                         ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
-                        eclipseBrush = New SolidBrush(Color.FromArgb(CInt(eclipseBrushTransparency), eclipseBrushColor))
+                        'eclipseBrush = New SolidBrush(Color.FromArgb(CInt(255), Color.White))
+                        'Dim eclipseDiameter2 As Single = eclipseDiameter * 2
+                        'g.FillEllipse(eclipseBrush, CSng((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter2 / 2), CSng((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter2 / 2), eclipseDiameter2, eclipseDiameter2)
+
+                        'eclipseBrushColor = baseColor1
+                        ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
+
+                        eclipseBrush = New SolidBrush(baseColor1)
                         g.FillEllipse(eclipseBrush, CSng((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter / 2), CSng((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter / 2), eclipseDiameter, eclipseDiameter)
 
-                        'Try
-                        '   CROSSHAIRS
-                        '   Dim pts As New List(Of PointF)
-                        ''  VERTICAL CROSSHAIR LINE
-                        '   Dim verticalLength As Integer = 6 '24
-                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) - verticalLength + offsetY))
-                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) + verticalLength + offsetY)) 'Me.LineShape1.EndPoint = 
+                        eclipsePen.Width = 0.05F
+                        g.DrawEllipse(eclipsePen, CSng((Me.ClientRectangle.Width / 2) + offsetX - eclipseDiameter / 2), CSng((Me.ClientRectangle.Height / 2) + offsetY - eclipseDiameter / 2), eclipseDiameter, eclipseDiameter)
 
-                        ''  HORIZONTAL CROSSHAIR LINE
-                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) - verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
-                        '   pts.Add(New PointF((Me.ClientRectangle.Width / 2) + verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
-                        '   eclipsePen = New Pen(eclipseBrush)
-                        '   eclipsePen.Width = lineWidth
-                        '   g.DrawLine(eclipsePen, pts(0), pts(1))
-                        '   g.DrawLine(eclipsePen, pts(2), pts(3))
+                        'OUTER ECLIPSE
+                        'Try
+                        '    'CROSSHAIRS
+                        '    Dim pts As New List(Of PointF)
+                        '    '  VERTICAL CROSSHAIR LINE
+                        '    Dim verticalLength As Integer = 6 '24
+                        '    pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) - verticalLength + offsetY))
+                        '    pts.Add(New PointF((Me.ClientRectangle.Width / 2) + offsetX, (Me.ClientRectangle.Height / 2) + verticalLength + offsetY)) 'Me.LineShape1.EndPoint = 
+
+                        '    '  HORIZONTAL CROSSHAIR LINE
+                        '    pts.Add(New PointF((Me.ClientRectangle.Width / 2) - verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
+                        '    pts.Add(New PointF((Me.ClientRectangle.Width / 2) + verticalLength + offsetX, (Me.ClientRectangle.Height / 2) + offsetY))
+                        '    eclipsePen = New Pen(eclipseBrush)
+                        '    eclipsePen.Width = lineWidth
+                        '    g.DrawLine(eclipsePen, pts(0), pts(1))
+                        '    g.DrawLine(eclipsePen, pts(2), pts(3))
                         'Catch ex As Exception
                         '    Err.Clear()
                         'End Try
@@ -102,8 +115,10 @@ Public Class Form1
     End Sub
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         pauseDrawing = True
+        Me.Invalidate()
     End Sub
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         pauseDrawing = True
+        Me.Invalidate()
     End Sub
 End Class
