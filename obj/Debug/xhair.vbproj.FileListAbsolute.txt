@@ -18,3 +18,5 @@ F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Debug\xhair.vbproj
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Debug\xhair.exe
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Debug\xhair.pdb
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Debug\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Debug\view-full-screen.jpg
+F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Debug\xhair.ico
