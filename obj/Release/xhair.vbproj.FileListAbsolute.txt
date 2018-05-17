@@ -9,3 +9,4 @@ F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.exe
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.xml
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.pdb
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Release\xhair.ico
+F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.vbprojResolveAssemblyReference.cache
