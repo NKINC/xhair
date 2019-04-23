@@ -3,4 +3,4 @@ Paints a crosshair on center of screen for gaming crosshairs (Windowed and Full 
 Tested Xhair on: "theHunter: Call of the Wild"<br/>
 NUM LOCK = Toggle Visible On/Off<br/><br/>
 <br/>
-<a href="http://www.nk-inc.com/downloads/fn/xhair.zip">Download Binary: XHair.zip</a>
+<a href="http://www.nk-inc.com/downloads/fn/xhair-binaries-release.zip">Download Binary: xhair-binaries-release.zip</a>
