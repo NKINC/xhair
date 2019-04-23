@@ -307,42 +307,47 @@ Public Class Form1
                 If Control.ModifierKeys = Keys.Alt Then
                     pauseDrawing = True
                     If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        Me.Invalidate(True)
+                        'Me.Invalidate(True)
                         Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
                         img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
                         bitmapXHair = Nothing
                     End If
                     'Beep()
-                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Then
+                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Or Control.ModifierKeys = Keys.LControlKey Or Control.ModifierKeys = Keys.rControlKey Then
                     pauseDrawing = True
                     If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        Me.Invalidate(True)
+                        'Me.Invalidate(True)
                         Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
                         img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
                         'Beep()
                         bitmapXHair = Nothing
+
                     End If
 
                 Else
                     pauseDrawing = True
                     If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        Me.Invalidate(True)
+                        'Me.Invalidate(True)
                         Dim img As System.Drawing.Image = ScreenCapture.CaptureDesktop()
                         img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
                         'Beep()
                         bitmapXHair = Nothing
-                    End If
 
+                    End If
                 End If
+                pauseDrawing = False
+                Timer1.Enabled = True
             ElseIf Key = Keys.F12 Then
                 pauseDrawing = True
                 If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                    Me.Invalidate(True)
+                    'Me.Invalidate(True)
                     Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
                     img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
                     'Beep()
                     bitmapXHair = Nothing
                 End If
+                pauseDrawing = False
+                Timer1.Enabled = True
 
             ElseIf Key = Keys.Oemplus Then ' CONTROL + PLUS SIGN INCREASES XHAIR SIZE
                 If Control.ModifierKeys = Keys.Alt Then
@@ -351,7 +356,7 @@ Public Class Form1
                         bitmapXHair = Nothing
                         'Win32Helper.NotifyFileAssociationChanged()
                     End If
-                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Then
+                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Or Control.ModifierKeys = Keys.LControlKey Or Control.ModifierKeys = Keys.rControlKey Then
                     If eclipseDiameter < 400 Then
                         eclipseDiameter = eclipseDiameter + 10
                         bitmapXHair = Nothing
@@ -365,7 +370,7 @@ Public Class Form1
                         bitmapXHair = Nothing
                         'Win32Helper.NotifyFileAssociationChanged()
                     End If
-                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Then
+                ElseIf Control.ModifierKeys = Keys.Control Or Control.ModifierKeys = Keys.ControlKey Or Control.ModifierKeys = Keys.LControlKey Or Control.ModifierKeys = Keys.rControlKey Then
                     If eclipseDiameter > 10 Then
                         eclipseDiameter = eclipseDiameter - 10
                         bitmapXHair = Nothing
