@@ -64,7 +64,7 @@ Public Class Form1
         eclipseDiameter = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseDiameter", eclipseDiameter.ToString()))
         lineWidth = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidth", lineWidth.ToString()))
         lineWidthArc = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidthArc", lineWidthArc.ToString()))
-        Timer1.Interval = 1 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
+        Timer1.Interval = 100 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
         timerInterval = Timer1.Interval
         eclipseBrushOpacity = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString()))
         imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString()))
@@ -107,7 +107,7 @@ Public Class Form1
         '    End If
         'Next
         refreshRate = 1.0F
-        Timer1.Interval = 1 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
+        Timer1.Interval = 100 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
         timerInterval = Timer1.Interval
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "refreshRate", refreshRate.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "timerInterval", timerInterval.ToString())
@@ -179,7 +179,7 @@ Public Class Form1
             '        End If
             '    End If
             'Next
-            Timer1.Interval = 1 ' CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
+            Timer1.Interval = 100 ' CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
             timerInterval = Timer1.Interval
             If drawXHair = True Then
                 If eclipseDiameter < 6.0F Then
