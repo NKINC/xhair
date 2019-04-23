@@ -10,3 +10,15 @@ F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.xml
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.pdb
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Release\xhair.ico
 F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\obj\Release\xhair.vbprojResolveAssemblyReference.cache
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Release\view-full-screen.jpg
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Release\xhair.ico
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Release\xhair.exe
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Release\xhair.pdb
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Release\xhair.xml
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.vbprojResolveAssemblyReference.cache
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.Form1.resources
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.Resources.resources
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.vbproj.GenerateResource.Cache
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.exe
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.xml
+C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.pdb
