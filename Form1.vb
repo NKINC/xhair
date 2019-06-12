@@ -111,6 +111,7 @@ Public Class Form1
         timerInterval = Timer1.Interval
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "refreshRate", refreshRate.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "timerInterval", timerInterval.ToString())
+        eclipseBrushOpacity = eclipseBrush.Color.A
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString())
@@ -781,10 +782,13 @@ Public Class Form1
                                         If baseColorInnerFill(colorIndexFill).A > 0 Then
                                             eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
                                         Else
-                                            eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
+                                            eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
                                         End If
 
-                                        gClone.FillEllipse(eclipseBrush, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
+                                        ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
+                                        If eclipseBrush.Color.A > 0 Then
+                                            gClone.FillEllipse(eclipseBrush, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
+                                        End If
                                         ' DRAW BLACK CIRCLE AROUND CENTER DOT
                                         eclipsePen.Width = lineWidth
                                         gClone.DrawEllipse(eclipsePen, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
@@ -792,23 +796,18 @@ Public Class Form1
                                         If eclipseDiameter >= 20 Then
                                             gClone.DrawEllipse(New Pen(Color.FromArgb(192, 255, 255, 255)), (lineWidth) + (eclipseDiameter / 4), (lineWidth) + (eclipseDiameter / 4), CSng(eclipseDiameter - (eclipseDiameter / 2) - (lineWidth)), CSng(eclipseDiameter - (eclipseDiameter / 2) - (lineWidth)))
                                         End If
-                                        'gClone.Dispose()
 
                                         If drawXHair Then
                                             Dim pts As New List(Of PointF)
-                                            Dim penCrossHairs As Pen = New Pen(Color.Transparent, 1)
-                                            If baseColorInnerFill(colorIndexFill).A <= 0 Then
-                                                penCrossHairs = New Pen(eclipsePen.Color, 1)
-                                            End If
-                                            'penCrossHairs.Width = 2
+                                            Dim penCrossHairs As Pen = New Pen(Color.Black, 1)
                                             ' HORIZONTAL LINE
                                             pts.Add(New PointF(CSng(lineWidth), CSng((eclipseDiameter))))
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
                                             ' VERTICAL LINE
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng(lineWidth)))
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
-                                            gClone.DrawLine(penCrossHairs, New PointF(CSng((eclipseDiameter) / 2), 0), New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter))))
-                                            gClone.DrawLine(penCrossHairs, New PointF(0, CSng((eclipseDiameter) / 2)), New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter) / 2)))
+                                            gClone.DrawLine(eclipsePen, New PointF(CSng((eclipseDiameter) / 2), lineWidth), New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter - lineWidth))))
+                                            gClone.DrawLine(eclipsePen, New PointF(lineWidth, CSng((eclipseDiameter) / 2)), New PointF(CSng((eclipseDiameter - lineWidth)), CSng((eclipseDiameter) / 2)))
                                             Dim ptCenter As New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter) / 2))
                                             If penCrossHairs.Color = Color.Transparent Then
                                                 bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
@@ -820,6 +819,7 @@ Public Class Form1
                                                 End If
                                             End If
                                         End If
+                                        gClone.Dispose()
                                     End Using
                                     bitmapXHair = bm.Clone()
                                 End If
@@ -900,8 +900,9 @@ Public Class Form1
 
 
                                         eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
-                                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                                        gClone.FillEllipse(eclipseBrush, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
+                                        If eclipseBrush.Color.A > 0 Then
+                                            gClone.FillEllipse(eclipseBrush, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
+                                        End If
                                         ' DRAW BLACK CIRCLE AROUND CENTER DOT
                                         eclipsePen.Width = lineWidth
                                         gClone.DrawEllipse(eclipsePen, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
@@ -909,22 +910,18 @@ Public Class Form1
                                         If eclipseDiameter >= 20 Then
                                             gClone.DrawEllipse(New Pen(Color.FromArgb(192, 255, 255, 255)), (lineWidth) + (eclipseDiameter / 4), (lineWidth) + (eclipseDiameter / 4), CSng(eclipseDiameter - (eclipseDiameter / 2) - (lineWidth)), CSng(eclipseDiameter - (eclipseDiameter / 2) - (lineWidth)))
                                         End If
-                                        'gClone.Dispose()
 
                                         If drawXHair Then
                                             Dim pts As New List(Of PointF)
-                                            Dim penCrossHairs As Pen = New Pen(Color.Transparent, 1)
-                                            If baseColorInnerFill(colorIndexFill).A <= 0 Then
-                                                penCrossHairs = New Pen(eclipsePen.Color, 1)
-                                            End If
+                                            Dim penCrossHairs As Pen = New Pen(Color.FromArgb(255, Color.Black), 1.0F)
                                             ' HORIZONTAL LINE
                                             pts.Add(New PointF(CSng(lineWidth), CSng((eclipseDiameter))))
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
-                                            ' VERTICAL LINE
+                                            '' VERTICAL LINE
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng(lineWidth)))
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
-                                            gClone.DrawLine(penCrossHairs, New PointF(CSng((eclipseDiameter) / 2), 0), New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter))))
-                                            gClone.DrawLine(penCrossHairs, New PointF(0, CSng((eclipseDiameter) / 2)), New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter) / 2)))
+                                            gClone.DrawLine(eclipsePen, New PointF(CSng((eclipseDiameter) / 2), lineWidth), New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter - lineWidth))))
+                                            gClone.DrawLine(eclipsePen, New PointF(lineWidth, CSng((eclipseDiameter) / 2)), New PointF(CSng((eclipseDiameter - lineWidth)), CSng((eclipseDiameter) / 2)))
                                             Dim ptCenter As New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter) / 2))
                                             If penCrossHairs.Color = Color.Transparent Then
                                                 bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
@@ -936,9 +933,9 @@ Public Class Form1
                                                 End If
                                             End If
                                         End If
+                                        gClone.Dispose()
                                     End Using
 
-                                    ''gClone.Dispose()
                                     ' SET IMAGE SETTINGS
 
                                     '' DRAW IMAGE
