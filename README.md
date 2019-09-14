@@ -22,10 +22,15 @@ ALT+F=cycle fill color<br/>
 ALT+NUMPAD=store preset<br/>
 NUMPAD=recall preset<br/>
 ALT+C=Reset presets<br/>
+ALT+I=Custom Crosshair Image<br/>
 ALT+L=lineWidth+1<br/>
 CNTRL+L=lineWidth-1<br/>
 CNTRL+O=Open screenshot path<br/>
 ALT+F11=toggle fullscreen mode<br/>
+ALT+R=rotate angle - 45<br/>
+CNTRL+R=rotate angle + 45<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 <a href="http://www.nk-inc.com/downloads/fn/xhair-binaries-release.zip">Download Binary: xhair-binaries-release.zip</a>
