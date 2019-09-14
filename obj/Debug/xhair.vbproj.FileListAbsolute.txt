@@ -32,3 +32,15 @@ C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Debug\xhair.ico
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Debug\xhair.exe
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Debug\xhair.pdb
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\bin\Debug\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Debug\view-full-screen.jpg
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Debug\xhair.exe
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Debug\xhair.pdb
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Debug\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.vbprojAssemblyReference.cache
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.Form1.resources
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.Resources.resources
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.vbproj.GenerateResource.cache
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.vbproj.CoreCompileInputs.cache
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.exe
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Debug\xhair.pdb
