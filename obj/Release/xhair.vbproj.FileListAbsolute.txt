@@ -22,3 +22,14 @@ C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.vbproj.G
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.exe
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.xml
 C:\Users\NICK\Downloads\xhair-master (2)\xhair-master\obj\Release\xhair.pdb
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Release\view-full-screen.jpg
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Release\xhair.exe
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Release\xhair.pdb
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\bin\Release\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.Form1.resources
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.Resources.resources
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.vbproj.GenerateResource.cache
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.vbproj.CoreCompileInputs.cache
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.exe
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.xml
+F:\Data\PROGRAMMING\VS.Net\2019\xhair-master\xhair-master\obj\Release\xhair.pdb
