@@ -4,6 +4,7 @@ Tested Xhair on: "theHunter: Call of the Wild", "World Of Warships"<br/>
 NUM LOCK = Toggle Visible On/Off<br/><br/>
 Press ALT+? for list of commands<br/>
 CROSSHAIR INSTRUCTIONS:ALT+?<br/>
+ALT+F12=Settings Dialog<br/>
 ALT+PRINTSCR=Screenshot<br/>
 CNTRL+PRINTSCR=Screenshot<br/>
 PRINTSCR=Screenshot<br/>
