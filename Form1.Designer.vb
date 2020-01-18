@@ -25,11 +25,21 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerCountdown = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerCountdownGo = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'Timer1
         '
         Me.Timer1.Interval = 1
+        '
+        'TimerCountdown
+        '
+        Me.TimerCountdown.Interval = 1000
+        '
+        'TimerCountdownGo
+        '
+        Me.TimerCountdownGo.Interval = 500
         '
         'Form1
         '
@@ -55,4 +65,6 @@ Partial Class Form1
     End Sub
 
     Friend WithEvents Timer1 As Timer
+    Public WithEvents TimerCountdown As Timer
+    Public WithEvents TimerCountdownGo As Timer
 End Class

@@ -27,33 +27,7 @@ Public Class Form1
     Public colorIndexPen As Integer = 0
     Public imageSavePath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"
     Public aTimer As New System.Timers.Timer()
-    'ORANGE = Color.FromArgb(eclipseBrushOpacity, 255, 154, 2) 
-    'YELLOW = Color.FromArgb(eclipseBrushOpacity, 255, 255, 0) 
-    'Public baseColorInnerFill0 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 154, 2)
-    'Public baseColorInnerFill1 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 255, 255)
-    'Public baseColorInnerFill2 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 255, 0)
-    'Public baseColorInnerFill3 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 0, 0)
-    'Public baseColorInnerFill4 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 255, 0)
-    'Public baseColorInnerFill5 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 255, 255)
-    'Public baseColorInnerFill6 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 0, 255)
-    'Public baseColorInnerFill7 As Color = Color.FromArgb(eclipseBrushOpacity, 64, 64, 64)
-    'Public baseColorInnerFill8 As Color = Color.FromArgb(eclipseBrushOpacity, 32, 32, 32)
-    'Public baseColorInnerFill9 As Color = Color.FromArgb(eclipseBrushOpacity, 128, 128, 128)
-    'Public baseColorInnerFill10 As Color = Color.FromArgb(255, 0, 0, 0)
-    'Public baseColorInnerFill11 As Color = Color.FromArgb(255, Color.Transparent)
     Public baseColorInnerFill As New List(Of Color)
-    'Public baseColorOuterRing0 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 154, 2)
-    'Public baseColorOuterRing1 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 255, 255) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing2 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 255, 0) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing3 As Color = Color.FromArgb(eclipseBrushOpacity, 255, 0, 0) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing4 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 255, 0) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing5 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 255, 255) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing6 As Color = Color.FromArgb(eclipseBrushOpacity, 0, 0, 255) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing7 As Color = Color.FromArgb(eclipseBrushOpacity, 32, 32, 32)
-    'Public baseColorOuterRing8 As Color = Color.FromArgb(eclipseBrushOpacity, 64, 64, 64) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing9 As Color = Color.FromArgb(eclipseBrushOpacity, 128, 128, 128) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing10 As Color = Color.FromArgb(255, 0, 0, 0) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
-    'Public baseColorOuterRing11 As Color = Color.FromArgb(255, Color.Transparent) 'Color.FromArgb(eclipseBrushOpacity, 0, 0, 0)
     Public baseColorOuterRing As New List(Of Color)
 
     Public eclipseBrush As SolidBrush = Nothing 'Nothing
@@ -107,39 +81,40 @@ Public Class Form1
             imgXHair = Bitmap.FromFile(imgfilePath)
         End If
         clearCanvas()
-        'refreshRate = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "refreshRate", refreshRate.ToString()))
-        'Dim query As New sm.SelectQuery("Win32_VideoController")
-        'Dim query As New sm.SelectQuery("Win32_VideoController")
-        'For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
-        '        Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
-        '        If CurrentRefreshRate IsNot Nothing Then
-        '            'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
-        '            If IsNumeric(CurrentRefreshRate) Then
-        '            refreshRate = CSng(CurrentRefreshRate)
-        '            Exit For
-        '        End If
-        '    End If
-        'Next
         Timer1.Interval = 100 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
         timerInterval = Timer1.Interval
-        'timerInterval = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "timerInterval", timerInterval.ToString()))
         eclipseBrushOpacity = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString()))
         imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString()))
-        'eclipsePen.Color = Color.FromArgb(CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.A", eclipsePen.Color.A)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.R", eclipsePen.Color.R)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.G", eclipsePen.Color.G)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.B", eclipsePen.Color.B)))
-        'eclipseBrush.Color = Color.FromArgb(CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.A", eclipsePen.Color.A)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.R", eclipsePen.Color.R)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.G", eclipsePen.Color.G)), CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.B", eclipsePen.Color.B)))
         colorIndexFill = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString()))
         colorIndexPen = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString()))
-        'If baseColorOuterRing(colorIndexPen).A > 0 Then
         eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorOuterRing(colorIndexPen)))
-        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-        '= GetSetting(Application.ProductName, "SETTINGS", "", )
+        eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
         bitmapXHair = Nothing
         pauseDrawing = pauseTemp
         drawOverlay(drawOverlayFullScreen)
     End Sub
+    Public Function getSettingObject(index As Integer) As DialogSettings.Setting
+        On Error Resume Next
+        Dim pauseTemp = pauseDrawing
+        Dim s As New DialogSettings.Setting
+        Dim settingName As String = CStr("_" & index.ToString() & "")
+        s.offsetX = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "offsetX", offsetX.ToString()))
+        s.offsetY = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "offsetY", offsetY.ToString()))
+        s.drawXHair = CBool(GetSetting(Application.ProductName, "SETTINGS" & settingName, "drawXHair", drawXHair.ToString()))
+        s.drawXHairRotateAngle = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "drawXHairRotateAngle", drawXHairRotateAngle.ToString()))
+        s.eclipseDiameter = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseDiameter", eclipseDiameter.ToString()))
+        s.lineWidth = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidth", lineWidth.ToString()))
+        s.lineWidthArc = CSng(GetSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidthArc", lineWidthArc.ToString()))
+        s.imgfilePath = ""
+        s.imgfilePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imgfilePath", ""))
+        s.timerInterval = Timer1.Interval
+        s.eclipseBrushOpacity = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString()))
+        s.imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString()))
+        s.colorIndexFill = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString()))
+        s.colorIndexPen = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString()))
+    End Function
+    Public indexPreset As Integer = 0
     Public Sub settingSave(Optional settingName As String = "")
-        'On Error Resume Next
-        ' SaveSetting(Application.ProductName, "SETTINGS", "", )
         Dim pauseTemp = pauseDrawing
         pauseDrawing = True
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "offsetX", offsetX.ToString())
@@ -147,20 +122,9 @@ Public Class Form1
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "drawXHair", drawXHair.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "drawXHairRotateAngle", drawXHairRotateAngle.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseDiameter", eclipseDiameter.ToString())
-        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidth", lineWidth.ToString())
-        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidthArc", lineWidthArc.ToString())
+        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidth", CSng(lineWidth).ToString())
+        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "lineWidthArc", CSng(lineWidthArc).ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "imgfilePath", imgfilePath.ToString())
-        'Dim query As New sm.SelectQuery("Win32_VideoController")
-        'For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
-        '    Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
-        '    If CurrentRefreshRate IsNot Nothing Then
-        '        'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
-        '        If IsNumeric(CurrentRefreshRate) Then
-        '            refreshRate = CSng(CurrentRefreshRate)
-        '            Exit For
-        '        End If
-        '    End If
-        'Next
         Timer1.Interval = 100 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
         timerInterval = Timer1.Interval
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "refreshRate", refreshRate.ToString())
@@ -168,41 +132,13 @@ Public Class Form1
         eclipseBrushOpacity = eclipseBrush.Color.A
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString())
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.A", eclipsePen.Color.A)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.R", eclipsePen.Color.R)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.G", eclipsePen.Color.G)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipsePen.B", eclipsePen.Color.B)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.A", eclipsePen.Color.A)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.R", eclipsePen.Color.R)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.G", eclipsePen.Color.G)
-        'SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrush.B", eclipsePen.Color.B)
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString())
-        ' SaveSetting(Application.ProductName, "SETTINGS", "", ) 
         clearCanvas()
         bitmapXHair = Nothing
         pauseDrawing = pauseTemp
         drawOverlay(drawOverlayFullScreen)
     End Sub
-    'Public Function fibonacci(ByRef lst As List(Of Single), x1 As Single, x2 As Single, count As Integer) As List(Of Single)
-    '    If lst Is Nothing Then lst = New List(Of Single)
-    '    If Not lst.Contains(x1) Then lst.Add(x1)
-    '    If Not lst.Contains(x2) Then lst.Add(x2)
-    '    Dim x3 As Single = x1 + x2
-    '    If Not lst.Contains(x3) Then lst.Add(x3)
-    '    If count > (lst.Count - 1) Then
-    '        For x As Integer = (lst.Count) To count Step 1
-    '            'lst = fibonacci(lst, lst(lst.Count - 1), lst(lst.Count - 2), count)
-    '            x1 = lst(lst.Count - 1)
-    '            x2 = lst(lst.Count - 2)
-    '            If Not lst.Contains(x1) Then lst.Add(x1)
-    '            If Not lst.Contains(x2) Then lst.Add(x2)
-    '            x3 = x1 + x2
-    '            If Not lst.Contains(x3) Then lst.Add(x3)
-    '        Next
-    '    End If
-    '    Return lst
-    'End Function
     Public Function fibonacci(x1 As Integer, x2 As Integer, count As Integer) As List(Of Integer)
         Dim lst As New List(Of Integer)
         If Not lst.Contains(x1) Then lst.Add(x1)
@@ -211,7 +147,6 @@ Public Class Form1
         If Not lst.Contains(x3) Then lst.Add(x3)
         If count > (lst.Count) Then
             For x As Integer = (lst.Count) To count Step 1
-                'lst = fibonacci(lst, lst(lst.Count - 1), lst(lst.Count - 2), count)
                 x1 = lst(lst.Count - 1)
                 x2 = lst(lst.Count - 2)
                 If Not lst.Contains(x1) Then lst.Add(x1)
@@ -225,6 +160,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+            countDown = -1
             aTimer.Enabled = False
             Dim strOut As String = ""
             For Each x As Integer In fibonacci(CInt(0), CInt(1), CInt(4)).ToArray
@@ -237,8 +173,7 @@ Public Class Form1
         Try
             bitmapXHair = Nothing
             clearCanvas()
-            'Me.Hide()
-            imageSavePath = Application.StartupPath.ToString().TrimEnd("\"c) & "\"c '"C:\Program Files (x86)\Steam\userdata\55379670\760\remote\518790\screenshots\xhair-screenshot-"
+            imageSavePath = Application.StartupPath.ToString().TrimEnd("\"c) & "\"c
             baseColorInnerFill = fillColorList(baseColorInnerFill)
             baseColorOuterRing = fillColorList(baseColorOuterRing)
         Catch ex As Exception
@@ -255,17 +190,6 @@ Public Class Form1
             Me.SetStyle(ControlStyles.SupportsTransparentBackColor, True)
             Me.AutoSizeMode = AutoSizeMode.GrowOnly
             Me.BackColor = Color.Transparent
-            'Dim query As New sm.SelectQuery("Win32_VideoController")
-            'For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
-            '    Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
-            '    If CurrentRefreshRate IsNot Nothing Then
-            '        'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
-            '        If IsNumeric(CurrentRefreshRate) Then
-            '            refreshRate = CSng(CurrentRefreshRate)
-            '            Exit For
-            '        End If
-            '    End If
-            'Next
             Timer1.Interval = 100 ' CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
             timerInterval = Timer1.Interval
             If drawXHair = True Then
@@ -278,12 +202,9 @@ Public Class Form1
             Else
                 eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
             End If
-            If baseColorInnerFill(colorIndexFill).A > 0 Then
-                eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-            Else
-                eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
-            End If
+            eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
             settingSave("_0")
+            indexPreset = 0
             Return
         Catch ex As Exception
             Err.Clear()
@@ -308,12 +229,6 @@ Public Class Form1
             bitmapXHair = Nothing
             clearCanvas()
             settingLoad("_0")
-            'Timer1.Enabled = False
-            'aTimer.Interval = 1
-            'AddHandler aTimer.Elapsed, AddressOf OnTimedEvent
-            'aTimer.AutoReset = True
-            'aTimer.Enabled = True
-            'Me.Invalidate(False)
         End Try
     End Sub
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
@@ -333,7 +248,6 @@ Public Class Form1
         pauseDrawing = True
         Me.Visible = False
         ScreenCapture.RefreshDesktop()
-        'Me.Invalidate(False)
     End Sub
     Private WithEvents kbHook As New KeyboardHook
     Private Sub kbHook_KeyDown(ByVal Key As System.Windows.Forms.Keys) Handles kbHook.KeyDown
@@ -356,7 +270,6 @@ Public Class Form1
     Public Function DoEvents_Wait(ByVal WaitTimeMilliseconds As Integer, dtSave As DateTime) As Boolean
         Try
             Dim dt As DateTime = DateTime.Now
-            'Dim dtSave As DateTime = DateTime.Now
             Do While dt < dtSave.AddMilliseconds(CInt(WaitTimeMilliseconds + 0))
                 'Application.DoEvents()
                 dt = DateTime.Now
@@ -370,32 +283,35 @@ Public Class Form1
     Public bmNumberPicked As New Bitmap(100, 77)
     Public Function getInstructions()
         strInstructions = New System.Text.StringBuilder
-        strInstructions.AppendLine("CROSSHAIR INSTRUCTIONS:ALT+?")
-        strInstructions.AppendLine("ALT+PRINTSCR=Screenshot")
-        strInstructions.AppendLine("CNTRL+PRINTSCR=Screenshot")
-        strInstructions.AppendLine("PRINTSCR=Screenshot")
-        strInstructions.AppendLine("F12=Screenshot")
-        strInstructions.AppendLine("ALT+PlusSign=Increase Size 2px")
-        strInstructions.AppendLine("ALT+MinusSign=Descrease Size 2px")
-        strInstructions.AppendLine("CNTRL+PlusSign=Increase Size 10px")
-        strInstructions.AppendLine("CNTRL+MinusSign=Descrease Size 10px")
-        strInstructions.AppendLine("ALT+X=Toggle Crosshair paint")
-        strInstructions.AppendLine("ALT+Arrows=Move Crosshair 1px")
-        strInstructions.AppendLine("CNTRL+Arrows=Move Crosshair 10px")
-        strInstructions.AppendLine("ALT+OpenBrackets=Reduce Opacity")
-        strInstructions.AppendLine("ALT+CloseBrackets=Increase Opacity")
-        strInstructions.AppendLine("ALT+O=cycle outer color")
-        strInstructions.AppendLine("ALT+F=cycle fill color")
-        strInstructions.AppendLine("ALT+NUMPAD=store preset")
-        strInstructions.AppendLine("NUMPAD=recall preset")
-        strInstructions.AppendLine("ALT+C=Reset presets")
-        strInstructions.AppendLine("ALT+I=Custom Crosshair Image")
-        strInstructions.AppendLine("ALT+L=lineWidth+1")
-        strInstructions.AppendLine("CNTRL+L=lineWidth-1")
-        strInstructions.AppendLine("CNTRL+O=Open screenshot path")
-        strInstructions.AppendLine("ALT+F11=toggle fullscreen mode")
-        strInstructions.AppendLine("ALT+R=rotate angle - 45")
-        strInstructions.AppendLine("CNTRL+R=rotate angle + 45")
+        strInstructions.AppendLine("ALT+? = CROSSHAIR INSTRUCTIONS")
+        strInstructions.AppendLine("ALT+F12 = Display Settings")
+        strInstructions.AppendLine("ALT+S = 20 sec. Countdown Start")
+        strInstructions.AppendLine("CNTRL+S = 20 sec. Countdown Stop")
+        strInstructions.AppendLine("ALT+PRINTSCR = Screenshot")
+        strInstructions.AppendLine("CNTRL+PRINTSCR = Screenshot")
+        strInstructions.AppendLine("PRINTSCR = Screenshot")
+        'strInstructions.AppendLine("F12 = Screenshot")
+        strInstructions.AppendLine("ALT+PlusSign = Increase Size 2px")
+        strInstructions.AppendLine("ALT+MinusSign = Descrease Size 2px")
+        strInstructions.AppendLine("CNTRL+PlusSign = Increase Size 10px")
+        strInstructions.AppendLine("CNTRL+MinusSign = Descrease Size 10px")
+        strInstructions.AppendLine("ALT+X = Toggle Crosshair paint")
+        strInstructions.AppendLine("ALT+Arrows = Move Crosshair 1px")
+        strInstructions.AppendLine("CNTRL+Arrows = Move Crosshair 10px")
+        strInstructions.AppendLine("ALT+OpenBrackets = Reduce Opacity")
+        strInstructions.AppendLine("ALT+CloseBrackets = Increase Opacity")
+        strInstructions.AppendLine("ALT+O = cycle outer color")
+        strInstructions.AppendLine("ALT+F = cycle fill color")
+        strInstructions.AppendLine("ALT+NUMPAD = store preset")
+        strInstructions.AppendLine("NUMPAD = recall preset")
+        strInstructions.AppendLine("ALT+C = Reset presets")
+        strInstructions.AppendLine("ALT+I = Custom Crosshair Image")
+        strInstructions.AppendLine("ALT+L = lineWidth+1")
+        strInstructions.AppendLine("CNTRL+L = lineWidth-1")
+        strInstructions.AppendLine("CNTRL+O = Open screenshot path")
+        strInstructions.AppendLine("ALT+F11 = toggle fullscreen mode")
+        strInstructions.AppendLine("ALT+R = rotate angle - 45")
+        strInstructions.AppendLine("CNTRL+R = rotate angle + 45")
         'strInstructions.AppendLine("CNTRL+M=toogle Magnification 2x")
         strInstructions.AppendLine("")
         strInstructions.AppendLine("")
@@ -409,83 +325,76 @@ Public Class Form1
             bitmapXHair = Nothing
             Dim strNum As String = ""
             If Key = System.Windows.Forms.Keys.PrintScreen Then
-                If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
-                    pauseDrawing = True
-                    drawOverlay(drawOverlayFullScreen)
-                    If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        'Me.Invalidate(True)
-
-                        Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
-                        'img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
-                        Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
-                        img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
-                        Clipboard.Clear()
-                        Clipboard.SetImage(img.Clone())
-                        'Clipboard.SetFileDropList(fnStringCollection)
-
-                        bitmapXHair = Nothing
-                        clearCanvas()
-                    End If
-                    pauseDrawing = False
-                    drawOverlay(drawOverlayFullScreen)
-                    'Beep()
-                ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Then
-                    pauseDrawing = True
-                    drawOverlay(drawOverlayFullScreen)
-                    If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        'Me.Invalidate(True)
-                        Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
-                        Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
-                        img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
-                        Clipboard.Clear()
-                        Clipboard.SetImage(img.Clone())
-                        bitmapXHair = Nothing
-                        clearCanvas()
-
-                    End If
-                    pauseDrawing = False
-                    drawOverlay(drawOverlayFullScreen)
-                Else
-                    pauseDrawing = True
-                    drawOverlay(drawOverlayFullScreen)
-                    If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                        'Me.Invalidate(True)
-                        Dim img As System.Drawing.Image = ScreenCapture.CaptureDesktop()
-                        'img.Save(imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png", System.Drawing.Imaging.ImageFormat.Png)
-                        Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
-                        img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
-                        Clipboard.Clear()
-                        Clipboard.SetImage(img.Clone())
-                        'Clipboard.SetFileDropList(fnStringCollection)
-
+                Try
+                    Me.Opacity = 0
+                    If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
+                        pauseDrawing = True
+                        drawOverlay(drawOverlayFullScreen)
+                        If DoEvents_Wait(CInt(1000 / refreshRate)) Then
+                            Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
+                            Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
+                            img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
+                            Clipboard.Clear()
+                            Clipboard.SetImage(img.Clone())
+                            'Clipboard.SetFileDropList(fnStringCollection)
+                            bitmapXHair = Nothing
+                            clearCanvas()
+                        End If
                         'Beep()
+                    ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Then
+                        Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
+                        Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
+                        img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
+                        Clipboard.Clear()
+                        Clipboard.SetImage(img.Clone())
                         bitmapXHair = Nothing
                         clearCanvas()
+                    Else
+                        Dim img As System.Drawing.Image = ScreenCapture.CaptureDesktop()
+                        Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
+                        img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
+                        Clipboard.Clear()
+                        Clipboard.SetImage(img.Clone())
                     End If
-                    pauseDrawing = False
-                    drawOverlay(drawOverlayFullScreen)
-                End If
-                pauseDrawing = False
-                Timer1.Enabled = True
-                drawOverlay(drawOverlayFullScreen)
+                Catch ex As Exception
+                    Err.Clear()
+                Finally
+                    Me.Opacity = 100
+                    refreshOverlay()
+                End Try
             ElseIf Key = System.Windows.Forms.Keys.F12 Then
-                pauseDrawing = True
-                drawOverlay(drawOverlayFullScreen)
-                If DoEvents_Wait(CInt(1000 / refreshRate)) Then
-                    'Me.Invalidate(True)
-                    Dim img As System.Drawing.Image = ScreenCapture.CaptureActiveWindow()
-                    Dim fn As String = imageSavePath & DateTime.Now.ToFileTime.ToString().Replace(":"c, "") & ".png"
-                    img.Save(fn, System.Drawing.Imaging.ImageFormat.Png)
-                    Clipboard.Clear()
-                    Clipboard.SetImage(img.Clone())
-                    'Clipboard.SetFileDropList(fnStringCollection)
-                    'Beep()
-                    bitmapXHair = Nothing
-                    clearCanvas()
+                If Not Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
+                    Exit Sub
                 End If
-                pauseDrawing = False
-                Timer1.Enabled = True
-                drawOverlay(drawOverlayFullScreen)
+                pauseDrawing = True
+                If DoEvents_Wait(CInt(1000 / refreshRate)) Then
+                    Dim frmSettings As New DialogSettings(Me)
+                    frmSettings.loadSettingsFromForm(False)
+                    frmSettings.ownerForm = Me
+                    Try
+                        'frmSettings.TopMost = True
+                        frmSettings.refreshPicturebox()
+                        Select Case frmSettings.ShowDialog(Me)
+                            Case DialogResult.OK, DialogResult.Yes
+
+                            Case Else
+
+                        End Select
+                    Catch ex As Exception
+                        Err.Clear()
+                    Finally
+                        If Not frmSettings Is Nothing Then
+                            frmSettings.Dispose()
+                        End If
+                        frmSettings = Nothing
+                        Me.Show()
+                        pauseDrawing = False
+                        Timer1.Enabled = True
+                        Me.TopMost = True
+                        drawOverlay(drawOverlayFullScreen)
+                    End Try
+                End If
+                'drawOverlay(drawOverlayFullScreen)
             ElseIf Key = System.Windows.Forms.Keys.Oemplus Then ' CONTROL + PLUS SIGN INCREASES XHAIR SIZE
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     If eclipseDiameter < 400 Then
@@ -503,6 +412,12 @@ Public Class Form1
                         drawOverlay(drawOverlayFullScreen)
                         'Win32Helper.NotifyFileAssociationChanged()
                     End If
+                End If
+            ElseIf Key = System.Windows.Forms.Keys.S Then ' CONTROL + PLUS SIGN INCREASES XHAIR SIZE
+                If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
+                    countdownStart(countdownMax)
+                ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Then
+                    countdownStop()
                 End If
             ElseIf Key = System.Windows.Forms.Keys.OemMinus Then ' CONTROL + MINUS SIGN DECREASES XHAIR SIZE
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
@@ -546,7 +461,6 @@ Public Class Form1
                     drawOverlay(drawOverlayFullScreen)
                 End If
             ElseIf Key = System.Windows.Forms.Keys.D0 Or Key = System.Windows.Forms.Keys.D1 Or Key = System.Windows.Forms.Keys.D2 Or Key = System.Windows.Forms.Keys.D3 Or Key = System.Windows.Forms.Keys.D4 Or Key = System.Windows.Forms.Keys.D5 Or Key = System.Windows.Forms.Keys.D6 Or Key = System.Windows.Forms.Keys.D7 Or Key = System.Windows.Forms.Keys.D8 Or Key = System.Windows.Forms.Keys.D9 Then
-                'Dim strNum As String = ""
                 If Key = System.Windows.Forms.Keys.D0 Then
                     strNum = "0"
                 ElseIf Key = System.Windows.Forms.Keys.D1 Then
@@ -609,14 +523,11 @@ GotoDrawNum:
                             gNumber.Clear(Color.Transparent)
                             Dim fontNum As New Font("Arial", 15)
                             Dim brushNum1 As New System.Drawing.SolidBrush(System.Drawing.Color.Cyan)
-                            'Dim brushNum2 As New System.Drawing.SolidBrush(System.Drawing.Color.White)
-                            'Dim pointsNumCenter As New PointF(0, 0) 'bmNumberPicked.Width / 2, bmNumberPicked.Height / 2)
                             gNumber.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
                             gNumber.TextRenderingHint = Drawing.Text.TextRenderingHint.ClearTypeGridFit
                             gNumber.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                             gNumber.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                             gNumber.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-                            'brushNum1 = New System.Drawing.SolidBrush(Color.FromArgb(50, Color.Cyan))
                             gNumber.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                             Dim drawFormat As New StringFormat()
                             drawFormat.Alignment = StringAlignment.Center
@@ -624,8 +535,6 @@ GotoDrawNum:
                                 strNum = numLabelStore(Key) & ""
                             End If
                             gNumber.DrawString(strNum, fontNum, brushNum1, New RectangleF(0, 0, bmNumberPicked.Width, bmNumberPicked.Height), drawFormat)
-                            'gNumber.DrawString(strNum, fontNum, New System.Drawing.SolidBrush(System.Drawing.Color.Black), New RectangleF(1, 1, bmNumberPicked.Width, bmNumberPicked.Height), drawFormat)
-                            'gNumber.DrawString(strNum, New Font("Arial", 14), Brushes.Black, New RectangleF((bmNumberPicked.Width / 2), (bmNumberPicked.Height / 2), bmNumberPicked.Width, bmNumberPicked.Height), drawFormat)
                             gNumber.Dispose()
                             bitmapXHair = Nothing
                             clearCanvas()
@@ -740,19 +649,6 @@ GotoDrawNum:
                             bitmapXHair = Nothing
                             clearCanvas()
                             drawOverlay(drawOverlayFullScreen)
-                            'Win32Helper.NotifyFileAssociationChanged()
-                            'For colorIdx As Integer = 0 To baseColorOuterRing.Count - 1
-                            '    If eclipsePen.Color.R = baseColorOuterRing(colorIdx).R And eclipsePen.Color.G = baseColorOuterRing(colorIdx).G And eclipsePen.Color.B = baseColorOuterRing(colorIdx).B Then
-                            '        If colorIdx >= baseColorOuterRing.Count - 1 Then
-                            '            eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorOuterRing(0)), lineWidth)
-                            '            Exit For
-                            '        Else
-                            '            eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorOuterRing(colorIdx + 1)), lineWidth)
-                            '            Exit For
-                            '        End If
-                            '    End If
-
-                            'Next
                         End If
                     End If
                 End If
@@ -807,19 +703,6 @@ GotoDrawNum:
                             clearCanvas()
                             drawOverlay(drawOverlayFullScreen)
                     End Select
-                    'If Clipboard.ContainsAudio Then
-                    '    Dim clipAudioStream As System.IO.Stream = Clipboard.GetAudioStream
-                    'ElseIf Clipboard.ContainsData(Nothing) Then
-                    '    'Clipboard.GetData(DataFormats.Bitmap)
-                    '    'Clipboard.GetData(TextDataFormat.Text)
-                    'ElseIf Clipboard.ContainsFileDropList Then
-                    '    Dim clipFileDropList(Clipboard.GetFileDropList.Count - 1) As String
-                    '    Clipboard.GetFileDropList.CopyTo(clipFileDropList, 0)
-                    'ElseIf Clipboard.ContainsImage Then
-                    '    Dim clipImage As System.Drawing.Image = Clipboard.GetImage
-                    'ElseIf Clipboard.ContainsText Then
-                    '    Dim clipText As String = Clipboard.GetText
-                    'End If
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
                     settingLoad("_0")
                     bitmapXHair = Nothing
@@ -834,11 +717,7 @@ GotoDrawNum:
                     If eclipseBrushOpacity <= 0 Then
                         eclipseBrushOpacity = 0
                     End If
-                    If baseColorInnerFill(colorIndexFill).A > 0 Then
-                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                    Else
-                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                    End If
+                    eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
                     bitmapXHair = Nothing
                     clearCanvas()
                     drawOverlay(drawOverlayFullScreen)
@@ -852,12 +731,7 @@ GotoDrawNum:
                     If eclipseBrushOpacity > 255 Then
                         eclipseBrushOpacity = 255
                     End If
-                    If baseColorInnerFill(colorIndexFill).A > 0 Then
-                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                    Else
-                        'eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
-                        eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                    End If
+                    eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
                     bitmapXHair = Nothing
                     clearCanvas()
                     drawOverlay(drawOverlayFullScreen)
@@ -894,18 +768,6 @@ GotoDrawNum:
                             bitmapXHair = Nothing
                             clearCanvas()
                             drawOverlay(drawOverlayFullScreen)
-                            'Win32Helper.NotifyFileAssociationChanged()
-                            'For colorIdx As Integer = 0 To baseColorInnerFill.Count - 1
-                            '    If eclipseBrush.Color.R = baseColorInnerFill(colorIdx).R And eclipseBrush.Color.G = baseColorInnerFill(colorIdx).G And eclipseBrush.Color.B = baseColorInnerFill(colorIdx).B Then
-                            '        If colorIdx >= baseColorInnerFill.Count - 1 Then
-                            '            eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(0)), lineWidth)
-                            '            Exit For
-                            '        Else
-                            '            eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIdx + 1)), lineWidth)
-                            '            Exit For
-                            '        End If
-                            '    End If
-                            'Next
                         End If
                     End If
                 End If
@@ -925,6 +787,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_0")
+                    indexPreset = 0
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -933,6 +796,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad1 Then ' LOAD DEFAULT SETTINGS
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_1")
+                    indexPreset = 1
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -946,6 +810,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_1")
+                    indexPreset = 1
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -954,6 +819,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad2 Then ' LOAD/SAVE SETTINGS SLOT 2
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_2")
+                    indexPreset = 2
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -967,6 +833,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_2")
+                    indexPreset = 2
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -975,6 +842,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad3 Then ' LOAD/SAVE SETTINGS SLOT 3
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_3")
+                    indexPreset = 3
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -988,6 +856,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_3")
+                    indexPreset = 3
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -996,6 +865,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad4 Then  ' LOAD/SAVE SETTINGS SLOT 4
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_4")
+                    indexPreset = 4
                     bitmapXHair = Nothing
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
                     bitmapXHair = Nothing
@@ -1009,6 +879,7 @@ GotoDrawNum:
                     clearCanvas()
                     clearCanvas()
                     settingLoad("_4")
+                    indexPreset = 4
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1017,6 +888,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad5 Then ' LOAD/SAVE SETTINGS SLOT 5
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_5")
+                    indexPreset = 5
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -1030,6 +902,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_5")
+                    indexPreset = 5
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1038,6 +911,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad6 Then ' LOAD/SAVE SETTINGS SLOT 6
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_6")
+                    indexPreset = 6
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -1051,6 +925,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_6")
+                    indexPreset = 6
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1059,6 +934,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad7 Then ' LOAD/SAVE SETTINGS SLOT 7
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_7")
+                    indexPreset = 7
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -1072,6 +948,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_7")
+                    indexPreset = 7
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1080,6 +957,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad8 Then ' LOAD/SAVE SETTINGS SLOT 8
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_8")
+                    indexPreset = 8
                     bitmapXHair = Nothing
                     clearCanvas()
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
@@ -1093,6 +971,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_8")
+                    indexPreset = 8
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1101,6 +980,7 @@ GotoDrawNum:
             ElseIf Key = System.Windows.Forms.Keys.NumPad9 Then ' LOAD/SAVE SETTINGS SLOT 9
                 If Control.ModifierKeys = System.Windows.Forms.Keys.Alt Then
                     settingSave("_9")
+                    indexPreset = 9
                     bitmapXHair = Nothing
                 ElseIf Control.ModifierKeys = System.Windows.Forms.Keys.ControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.Control Or Control.ModifierKeys = System.Windows.Forms.Keys.LControlKey Or Control.ModifierKeys = System.Windows.Forms.Keys.RControlKey Then  ' ALT + LEFT MOVES ARROW MOVES CENTER LEFT - MORE
                     bitmapXHair = Nothing
@@ -1113,6 +993,7 @@ GotoDrawNum:
                     bitmapXHair = Nothing
                     clearCanvas()
                     settingLoad("_9")
+                    indexPreset = 9
                     'Win32Helper.NotifyFileAssociationChanged()
                     pauseDrawing = False
                     Timer1.Enabled = True
@@ -1136,9 +1017,12 @@ GotoDrawNum:
                     If lineWidth > 1 Then
                         lineWidth = lineWidth - 1
                         lineWidthArc = lineWidthArc - 1
+                    ElseIf lineWidth >= 0.5 Then
+                        lineWidth = lineWidth - 0.25
+                        lineWidthArc = lineWidthArc - 0.25
                     Else
-                        lineWidth = 1
-                        lineWidthArc = 1
+                        lineWidth = 0.25
+                        lineWidthArc = 0.25
                     End If
                     bitmapXHair = Nothing
                     clearCanvas()
@@ -1170,20 +1054,293 @@ GotoDrawNum:
             Err.Clear()
         End Try
     End Sub
+    Public Function SetImageOpacity(ByVal sourceImage As Image, ByVal opacityPercent As Single) As Bitmap
+        Dim bmp As New Bitmap(sourceImage.Width, sourceImage.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+        Try
+            Using g As Graphics = Graphics.FromImage(bmp)
+                Using ia As New System.Drawing.Imaging.ImageAttributes
+                    Dim cm As New System.Drawing.Imaging.ColorMatrix
+                    cm.Matrix33 = CSng(opacityPercent / 100.0F)
+                    ia.SetColorMatrix(cm)
+                    g.DrawImage(sourceImage.Clone, New Rectangle(0, 0, bmp.Size.Width, bmp.Size.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia)
+                End Using
+            End Using
+        Catch ex As Exception
+            Err.Clear()
+        End Try
+        Return bmp.Clone
+    End Function
     Public imgXHair As Bitmap = Nothing
     Public imgfilePath As String = ""
+    Public Function getOverlay(fullScreen As Boolean, setting As DialogSettings.Setting) As System.Drawing.Bitmap
+        Dim dtSave As DateTime = DateTime.Now
+        If Not String.IsNullOrEmpty(setting.imgfilePath & "") Then
+            If System.IO.File.Exists(setting.imgfilePath & "") Then
+                imgXHair = Bitmap.FromFile(setting.imgfilePath)
+                Return SetImageOpacity(imgXHair.Clone, CSng(100 / (255 / setting.eclipseBrushOpacity))) 'bitmapXHair.Clone
+            End If
+        End If
+        If fullScreen Then
+            Try
+                ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
+                If True = True Then 'If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then 'And Me.Visible
+                    Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
+                        Try
+                            Dim bm As Bitmap = New Bitmap(setting.eclipseDiameter + (setting.lineWidth * 2), setting.eclipseDiameter + (setting.lineWidth * 2), Imaging.PixelFormat.Format32bppArgb)
+                            Try
+                                If Not String.IsNullOrEmpty(setting.imgfilePath & "") Then
+                                    imgXHair = Bitmap.FromFile(setting.imgfilePath)
+                                    Return SetImageOpacity(imgXHair.Clone, CSng(100 / (255 / setting.eclipseBrushOpacity)))
+                                ElseIf True = True Then
+                                    Using gClone As Graphics = Graphics.FromImage(bm)
+                                        gClone.Clear(Color.Transparent)
+                                        If Not drawXHairRotateAngle = 0 Then
+                                            Dim mat As New Drawing2D.Matrix
+                                            mat.RotateAt(setting.drawXHairRotateAngle, New PointF(CSng(setting.eclipseDiameter / 2), CSng(setting.eclipseDiameter / 2)))
+                                            gClone.Transform = mat
+                                        End If
+
+                                        ' SET IMAGE SETTINGS
+                                        gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                                        gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                                        gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                                        gClone.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                                        gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
+
+                                        eclipsePen = New Pen(baseColorOuterRing(setting.colorIndexPen))
+                                        eclipseBrush = New SolidBrush(Color.FromArgb(setting.eclipseBrushOpacity, baseColorInnerFill(setting.colorIndexFill)))
+                                        ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
+
+                                        If eclipseBrush.Color.A > 0 Then
+                                            gClone.FillEllipse(eclipseBrush, setting.lineWidth, setting.lineWidth, CSng(setting.eclipseDiameter - setting.lineWidth), CSng(setting.eclipseDiameter - setting.lineWidth))
+                                        End If
+                                        ' DRAW BLACK CIRCLE AROUND CENTER DOT
+                                        eclipsePen.Width = setting.lineWidth
+                                        gClone.DrawEllipse(eclipsePen, setting.lineWidth, setting.lineWidth, CSng(setting.eclipseDiameter - setting.lineWidth), CSng(setting.eclipseDiameter - setting.lineWidth))
+
+                                        If setting.eclipseDiameter >= 20 Then
+                                            gClone.DrawEllipse(New Pen(Color.FromArgb(192, 255, 255, 255)), (setting.lineWidth) + (setting.eclipseDiameter / 4), (setting.lineWidth) + (setting.eclipseDiameter / 4), CSng(setting.eclipseDiameter - (setting.eclipseDiameter / 2) - (setting.lineWidth)), CSng(setting.eclipseDiameter - (setting.eclipseDiameter / 2) - (setting.lineWidth)))
+                                        End If
+                                        'gClone.Dispose()
+
+                                        If setting.drawXHair Then
+                                            Dim pts As New List(Of PointF)
+                                            Dim penCrossHairs As Pen = New Pen(Color.Black, 1)
+                                            ' HORIZONTAL LINE
+                                            pts.Add(New PointF(CSng(setting.lineWidth), CSng((setting.eclipseDiameter))))
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng((setting.eclipseDiameter))))
+                                            ' VERTICAL LINE
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng(setting.lineWidth)))
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng((setting.eclipseDiameter))))
+                                            gClone.DrawLine(eclipsePen, New PointF(CSng((setting.eclipseDiameter) / 2), setting.lineWidth), New PointF(CSng((setting.eclipseDiameter) / 2), CSng((setting.eclipseDiameter - setting.lineWidth))))
+                                            gClone.DrawLine(eclipsePen, New PointF(setting.lineWidth, CSng((setting.eclipseDiameter) / 2)), New PointF(CSng((setting.eclipseDiameter - setting.lineWidth)), CSng((setting.eclipseDiameter) / 2)))
+                                            Dim ptCenter As New PointF(CSng((setting.eclipseDiameter) / 2), CSng((setting.eclipseDiameter) / 2))
+                                            If penCrossHairs.Color = Color.Transparent Then
+                                                bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
+                                            Else
+                                                If CInt(penCrossHairs.Color.R + penCrossHairs.Color.G + penCrossHairs.Color.B) / 3 >= 128 Then
+                                                    bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
+                                                Else
+                                                    bm.SetPixel(ptCenter.X, ptCenter.Y, Color.White)
+                                                End If
+                                            End If
+                                        End If
+                                        gClone.Dispose()
+                                    End Using
+                                    bitmapXHair = bm.Clone()
+                                Else
+                                    If Not imgXHair Is Nothing Then
+                                        If Not drawXHairRotateAngle = 0 Then
+                                            Dim mat As New Drawing2D.Matrix
+                                            bitmapXHair = imgXHair.Clone
+                                            Using gClone As Graphics = Graphics.FromImage(bitmapXHair)
+                                                gClone.Clear(Color.Transparent)
+                                                mat.RotateAt(setting.drawXHairRotateAngle, New PointF(CSng(bitmapXHair.Width / 2), CSng(bitmapXHair.Height / 2)))
+                                                gClone.Transform = mat
+                                                gClone.DrawImage(imgXHair, New Point(0, 0))
+                                                gClone.Dispose()
+                                            End Using
+                                        End If
+                                    End If
+                                End If
+                                ' SET IMAGE SETTINGS
+                                Return bitmapXHair.Clone
+                            Catch ex As Exception
+                                Err.Clear()
+                            Finally
+                                'g.Dispose()
+                                bm.Dispose()
+                                bm = Nothing
+                            End Try
+                        Catch ex As Exception
+                            Err.Clear()
+                        End Try
+                    End Using
+                End If
+                Return Nothing
+            Catch ex As Exception
+                Err.Clear()
+            Finally
+            End Try
+        Else
+            Try
+                ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
+                If True = True Then 'If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then 'And Me.Visible 
+                    Dim hwnd As IntPtr = Me.Handle          'IntPtr.Zero
+                    Using g As Graphics = Graphics.FromHwnd(hwnd)
+                        Try
+                            Dim bm As Bitmap = New Bitmap(setting.eclipseDiameter + (setting.lineWidth * 2), setting.eclipseDiameter + (setting.lineWidth * 2), Imaging.PixelFormat.Format32bppArgb)
+                            Try
+                                If Not String.IsNullOrEmpty(setting.imgfilePath & "") Then
+                                    'bitmapXHair = Nothing
+                                    imgXHair = Bitmap.FromFile(setting.imgfilePath)
+                                    Return SetImageOpacity(imgXHair.Clone, CSng(100 / (255 / setting.eclipseBrushOpacity)))
+                                    'Return imgXHair.Clone
+                                ElseIf True = True Then 'bitmapXHair Is Nothing Then
+                                    Using gClone As Graphics = Graphics.FromImage(bm)
+                                        gClone.Clear(Color.Transparent)
+                                        If Not setting.drawXHairRotateAngle = 0 Then
+                                            Dim mat As New Drawing2D.Matrix
+                                            mat.RotateAt(setting.drawXHairRotateAngle, New PointF(CSng(setting.eclipseDiameter / 2), CSng(setting.eclipseDiameter / 2)))
+                                            gClone.Transform = mat
+                                        End If
+                                        ' SET IMAGE SETTINGS
+                                        gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                                        gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                                        gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                                        gClone.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                                        gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
+                                        eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
+                                        eclipseBrush = New SolidBrush(Color.FromArgb(setting.eclipseBrushOpacity, baseColorInnerFill(setting.colorIndexFill)))
+                                        ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
+                                        If eclipseBrush.Color.A > 0 Then
+                                            gClone.FillEllipse(eclipseBrush, setting.lineWidth, setting.lineWidth, CSng(setting.eclipseDiameter - setting.lineWidth), CSng(setting.eclipseDiameter - setting.lineWidth))
+                                        End If
+                                        ' DRAW BLACK CIRCLE AROUND CENTER DOT
+                                        eclipsePen.Width = setting.lineWidth
+                                        gClone.DrawEllipse(eclipsePen, setting.lineWidth, setting.lineWidth, CSng(setting.eclipseDiameter - setting.lineWidth), CSng(setting.eclipseDiameter - setting.lineWidth))
+
+                                        If setting.eclipseDiameter >= 20 Then
+                                            gClone.DrawEllipse(New Pen(Color.FromArgb(192, 255, 255, 255)), (setting.lineWidth) + (setting.eclipseDiameter / 4), (setting.lineWidth) + (setting.eclipseDiameter / 4), CSng(setting.eclipseDiameter - (setting.eclipseDiameter / 2) - (setting.lineWidth)), CSng(setting.eclipseDiameter - (setting.eclipseDiameter / 2) - (setting.lineWidth)))
+                                        End If
+
+                                        If setting.drawXHair Then
+                                            Dim pts As New List(Of PointF)
+                                            Dim penCrossHairs As Pen = New Pen(Color.FromArgb(255, Color.Black), 1.0F)
+                                            ' HORIZONTAL LINE
+                                            pts.Add(New PointF(CSng(setting.lineWidth), CSng((setting.eclipseDiameter))))
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng((setting.eclipseDiameter))))
+                                            '' VERTICAL LINE
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng(setting.lineWidth)))
+                                            pts.Add(New PointF(CSng((setting.eclipseDiameter)), CSng((setting.eclipseDiameter))))
+                                            gClone.DrawLine(eclipsePen, New PointF(CSng((setting.eclipseDiameter) / 2), setting.lineWidth), New PointF(CSng((setting.eclipseDiameter) / 2), CSng((setting.eclipseDiameter - setting.lineWidth))))
+                                            gClone.DrawLine(eclipsePen, New PointF(setting.lineWidth, CSng((setting.eclipseDiameter) / 2)), New PointF(CSng((setting.eclipseDiameter - setting.lineWidth)), CSng((setting.eclipseDiameter) / 2)))
+                                            Dim ptCenter As New PointF(CSng((setting.eclipseDiameter) / 2), CSng((setting.eclipseDiameter) / 2))
+                                            If penCrossHairs.Color = Color.Transparent Then
+                                                bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
+                                            Else
+                                                If CInt(penCrossHairs.Color.R + penCrossHairs.Color.G + penCrossHairs.Color.B) / 3 >= 128 Then
+                                                    bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
+                                                Else
+                                                    bm.SetPixel(ptCenter.X, ptCenter.Y, Color.White)
+                                                End If
+                                            End If
+                                        End If
+                                        gClone.Dispose()
+                                    End Using
+                                    '' DRAW IMAGE
+                                    bitmapXHair = bm.Clone()
+                                Else
+                                    If Not imgXHair Is Nothing Then
+                                        If Not drawXHairRotateAngle = 0 Then
+                                            Dim mat As New Drawing2D.Matrix
+                                            bitmapXHair = imgXHair.Clone
+                                            Using gClone As Graphics = Graphics.FromImage(bitmapXHair)
+                                                gClone.Clear(Color.Transparent)
+                                                mat.RotateAt(setting.drawXHairRotateAngle, New PointF(CSng(bitmapXHair.Width / 2), CSng(bitmapXHair.Height / 2)))
+                                                gClone.Transform = mat
+                                                gClone.DrawImage(imgXHair, New Point(0, 0))
+                                                gClone.Dispose()
+                                            End Using
+                                        End If
+                                    End If
+                                End If
+                                Return bitmapXHair.Clone 'SetImageOpacity(imgXHair.Clone, CSng(100 / (255 / setting.eclipseBrushOpacity))) 'bitmapXHair.Clone
+                            Catch ex As Exception
+                                Err.Clear()
+                            Finally
+                                'g.Dispose()
+                                bm.Dispose()
+                                bm = Nothing
+                            End Try
+                        Catch ex As Exception
+                            Err.Clear()
+                        End Try
+                    End Using
+                End If
+                Return Nothing
+            Catch ex As Exception
+                Err.Clear()
+            Finally
+            End Try
+        End If
+        Return Nothing
+    End Function
+    Public Function FindBestFitFont(ByVal g As Graphics, ByVal text As String, ByVal font As Font, ByVal proposedSize As Size) As Font
+        While True
+            Dim size As SizeF = g.MeasureString(text, font)
+
+            If size.Height <= proposedSize.Height AndAlso size.Width <= proposedSize.Width Then
+                Return font
+            End If
+
+            Dim oldFont As Font = font
+            font = New Font(font.Name, CSng((font.Size * 0.9)), font.Style)
+            oldFont.Dispose()
+            Return font
+        End While
+        Return Nothing
+    End Function
     Public Sub drawOverlay(fullScreen As Boolean)
         Dim dtSave As DateTime = DateTime.Now
         If fullScreen Then
             Try
                 ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
                 If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then 'And Me.Visible
-                    'baseColorInnerFill = Color.FromArgb(eclipseBrushOpacity, eclipseBrush.Color)
                     Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
                         Try
                             Dim bm As Bitmap = New Bitmap(eclipseDiameter + (lineWidth * 2), eclipseDiameter + (lineWidth * 2), Imaging.PixelFormat.Format32bppArgb)
                             Try
-                                If Not imgXHair Is Nothing Then
+                                If countDown > 0 Or Not String.IsNullOrEmpty(countDownTextTemp) Then
+                                    bm = New Bitmap(640, 480, Imaging.PixelFormat.Format32bppArgb)
+                                    Dim countdownFontSize As Integer = 400
+                                    If Not String.IsNullOrEmpty(countDownTextTemp) Then
+                                        'countDownText = countDownText
+                                        countdownFontSize = 300
+                                    Else
+                                        countDownTextTemp = countDown.ToString()
+                                    End If
+                                    Using gClone As Graphics = Graphics.FromImage(bm)
+                                        gClone.Clear(Color.Transparent)
+                                        gClone.CompositingQuality = Drawing2D.CompositingQuality.AssumeLinear
+                                        gClone.InterpolationMode = Drawing2D.InterpolationMode.NearestNeighbor
+                                        gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                                        gClone.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                                        gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
+                                        Dim width As Single = bm.Width
+                                        Dim height As Single = bm.Height
+                                        Dim emSize As Single = height
+                                        Dim font As Font = New Font(FontFamily.GenericSansSerif, countdownFontSize, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+                                        Dim size As SizeF = g.MeasureString(countDownTextTemp, font)
+                                        For i As Integer = 10 To 1 Step -1
+                                            gClone.DrawString(countDownTextTemp, font, IIf(countDown > 0, New SolidBrush(Color.LightGray), New SolidBrush(Color.DarkSlateGray)), ((width - size.Width) / 2) - i, ((height - size.Height) / 2) + i)
+                                        Next
+                                        gClone.DrawString(countDownTextTemp, font, IIf(countDown > 0, New SolidBrush(Color.Navy), New SolidBrush(Color.LimeGreen)), ((width - size.Width) / 2), ((height - size.Height) / 2))
+                                        gClone.Dispose()
+                                    End Using
+                                    bitmapXHair = bm.Clone()
+                                    countDownTextTemp = ""
+                                ElseIf Not imgXHair Is Nothing Then
                                     bitmapXHair = Nothing
                                     bitmapXHair = imgXHair.Clone
                                 ElseIf Not String.IsNullOrEmpty(imgfilePath & "") Then
@@ -1201,8 +1358,6 @@ GotoDrawNum:
                                         End If
 
                                         ' SET IMAGE SETTINGS
-                                        'Dim Drawrush As Brush = Brushes.Transparent
-                                        'gClone.FillRectangle(Drawrush, 0, 0, bm.Width, bm.Height)
                                         gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                                         gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                                         gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
@@ -1210,12 +1365,7 @@ GotoDrawNum:
                                         gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
 
                                         eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
-                                        If baseColorInnerFill(colorIndexFill).A > 0 Then
-                                            eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                                        Else
-                                            eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                                        End If
-
+                                        eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
                                         ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
                                         If eclipseBrush.Color.A > 0 Then
                                             gClone.FillEllipse(eclipseBrush, lineWidth, lineWidth, CSng(eclipseDiameter - lineWidth), CSng(eclipseDiameter - lineWidth))
@@ -1231,7 +1381,6 @@ GotoDrawNum:
 
                                         If drawXHair Then
                                             Dim pts As New List(Of PointF)
-                                            'Dim penCrossHairs As Pen = New Pen(Color.Transparent, 1)
                                             Dim penCrossHairs As Pen = New Pen(Color.Black, 1)
                                             ' HORIZONTAL LINE
                                             pts.Add(New PointF(CSng(lineWidth), CSng((eclipseDiameter))))
@@ -1324,46 +1473,56 @@ GotoDrawNum:
                         refreshRate = 60
                         Err.Clear()
                     Finally
-                        'Dim query As New sm.SelectQuery("Win32_VideoController")
-                        'For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
-                        '    Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
-                        '    If CurrentRefreshRate IsNot Nothing Then
-                        '        'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
-                        '        If IsNumeric(CurrentRefreshRate) Then
-                        '            refreshRate = CSng(CurrentRefreshRate)
-                        '            Exit For
-                        '        End If
-                        '    End If
-                        'Next
                         Timer1.Interval = CInt(1000 / refreshRate)
-                        'Timer1.Interval = CInt(CInt(1000 / refreshRate))  'ms '(1000ms / 60hz)
                         timerInterval = Timer1.Interval
                         Timer1.Enabled = True
                     End Try
                     'Me.Refresh()
                 Else
                     numLockPrevious = KeyboardHook.IsKeyToggled(Keys.NumLock)
-                    Me.TopMost = False
-                    Me.SendToBack()
+                    'Me.TopMost = False
+                    'Me.SendToBack()
                 End If
             End Try
         Else
             Try
                 ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
-                If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then 'And Me.Visible 
-                    'baseColorInnerFill = Color.FromArgb(eclipseBrushOpacity, eclipseBrush.Color)
-                    'If KeyboardHook.IsKeyToggled(Keys.NumLock) Then
-                    '    If Not Me.Visible Then Me.Show()
-                    '    If Not Me.TopMost = True Then Me.TopMost = True
-                    '    Me.BringToFront()
-                    'End If
+                If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Or countDown >= 0 Or Not String.IsNullOrEmpty(countDownTextTemp & "") Then 'And Me.Visible 
                     Dim hwnd As IntPtr = Me.Handle          'IntPtr.Zero
                     Using g As Graphics = Graphics.FromHwnd(hwnd)
                         Try
-                            'Dim bm As Bitmap = New Bitmap(Me.ClientRectangle.Width, Me.ClientRectangle.Height, Imaging.PixelFormat.Format32bppArgb)
                             Dim bm As Bitmap = New Bitmap(eclipseDiameter + (lineWidth * 2), eclipseDiameter + (lineWidth * 2), Imaging.PixelFormat.Format32bppArgb)
                             Try
-                                If Not imgXHair Is Nothing Then
+                                If countDown > 0 Or Not String.IsNullOrEmpty(countDownTextTemp) Then
+                                    bm = New Bitmap(640, 480, Imaging.PixelFormat.Format32bppArgb)
+                                    Dim countdownFontSize As Integer = 400
+                                    If Not String.IsNullOrEmpty(countDownTextTemp) Then
+                                        'countDownTextTemp = countDownTextTemp
+                                        countdownFontSize = 300
+                                    Else
+                                        countDownTextTemp = countDown.ToString()
+                                    End If
+                                    Using gClone As Graphics = Graphics.FromImage(bm)
+                                        gClone.Clear(Color.Transparent)
+                                        gClone.CompositingQuality = Drawing2D.CompositingQuality.AssumeLinear
+                                        gClone.InterpolationMode = Drawing2D.InterpolationMode.NearestNeighbor
+                                        gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                                        gClone.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                                        gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
+                                        Dim width As Single = bm.Width
+                                        Dim height As Single = bm.Height
+                                        Dim emSize As Single = height
+                                        Dim font As Font = New Font(FontFamily.GenericSansSerif, countdownFontSize, FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+                                        Dim size As SizeF = g.MeasureString(countDownTextTemp, font)
+                                        For i As Integer = 10 To 1 Step -1
+                                            gClone.DrawString(countDownTextTemp, font, IIf(countDown > 0, New SolidBrush(Color.LightGray), New SolidBrush(Color.DarkSlateGray)), ((width - size.Width) / 2) - i, ((height - size.Height) / 2) + i)
+                                        Next
+                                        gClone.DrawString(countDownTextTemp, font, IIf(countDown > 0, New SolidBrush(Color.Navy), New SolidBrush(Color.LimeGreen)), ((width - size.Width) / 2), ((height - size.Height) / 2))
+                                        gClone.Dispose()
+                                    End Using
+                                    bitmapXHair = bm.Clone()
+                                    countDownTextTemp = ""
+                                ElseIf Not imgXHair Is Nothing Then
                                     bitmapXHair = Nothing
                                     bitmapXHair = imgXHair.Clone
                                 ElseIf Not String.IsNullOrEmpty(imgfilePath & "") Then
@@ -1380,8 +1539,6 @@ GotoDrawNum:
                                             gClone.Transform = mat
                                         End If
                                         ' SET IMAGE SETTINGS
-                                        'Dim Drawrush As Brush = Brushes.Transparent
-                                        'gClone.FillRectangle(Drawrush, 0, 0, bm.Width, bm.Height)
                                         gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                                         gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                                         gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
@@ -1403,10 +1560,6 @@ GotoDrawNum:
                                         If drawXHair Then
                                             Dim pts As New List(Of PointF)
                                             Dim penCrossHairs As Pen = New Pen(Color.FromArgb(255, Color.Black), 1.0F)
-                                            'If baseColorInnerFill(colorIndexFill).A <= 0 Then
-                                            '    penCrossHairs = New Pen(eclipsePen.Color, 1)
-                                            'End If
-                                            'penCrossHairs.Width = 2
                                             ' HORIZONTAL LINE
                                             pts.Add(New PointF(CSng(lineWidth), CSng((eclipseDiameter))))
                                             pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
@@ -1452,7 +1605,6 @@ GotoDrawNum:
                                 End If
                                 g.DrawImage(bitmapXHair.Clone(), CSng(g.VisibleClipBounds.Width / 2 + offsetX - bitmapXHair.Width / 2), CSng(g.VisibleClipBounds.Height / 2 + offsetY - bitmapXHair.Height / 2))
                                 If Not bmNumberPicked Is Nothing Then
-                                    'g.DrawImage(bmNumberPicked.Clone(), CSng(g.VisibleClipBounds.Width / 2 + offsetX - bmNumberPicked.Width / 2), CSng(g.VisibleClipBounds.Height / 2 + 100 - bmNumberPicked.Height / 2))
                                     g.DrawImage(bmNumberPicked.Clone(), CSng(g.VisibleClipBounds.Width - bmNumberPicked.Width), CSng(g.VisibleClipBounds.Height - bmNumberPicked.Height))
                                 End If
                             Catch ex As Exception
@@ -1472,35 +1624,15 @@ GotoDrawNum:
                 Err.Clear()
             Finally
                 If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then
-                    'If KeyboardHook.IsKeyToggled(Keys.NumLock) Then
-                    '    If Not Me.Visible Then Me.Show()
-                    '    If Not Me.TopMost = True Then Me.TopMost = True
-                    '    Me.BringToFront()
-                    'End If
-                    'Me.Show()
-                    'Me.TopMost = True
                     If numLockPrevious = False Then
                         numLockPrevious = KeyboardHook.IsKeyToggled(Keys.NumLock)
                         Win32Helper.NotifyFileAssociationChanged()
                     End If
                     Try
-                        Dim query As New sm.SelectQuery("Win32_VideoController")
-                        For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
-                            Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
-                            If CurrentRefreshRate IsNot Nothing Then
-                                'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
-                                If IsNumeric(CurrentRefreshRate) Then
-                                    refreshRate = CSng(CurrentRefreshRate)
-                                    Exit For
-                                End If
-                            End If
-                        Next
                     Catch ex As Exception
                         refreshRate = 60
                         Err.Clear()
                     Finally
-                        'Timer1.Interval = 1
-                        'Timer1.Interval = CInt(CInt(1000 / refreshRate))  'ms '(1000ms / 60hz)
                         Timer1.Interval = 1000 / refreshRate
                         If Not Me.Visible Then Me.Show()
                         If Not Me.TopMost = True Then
@@ -1510,13 +1642,12 @@ GotoDrawNum:
                     End Try
                 Else
                     numLockPrevious = KeyboardHook.IsKeyToggled(Keys.NumLock)
-                    Me.TopMost = False
-                    Me.SendToBack()
                 End If
                 Timer1.Enabled = True 'KeyboardHook.IsKeyToggled(Keys.NumLock)
             End Try
         End If
     End Sub
+
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Try
             drawOverlay(drawOverlayFullScreen)
@@ -1529,10 +1660,8 @@ GotoDrawNum:
         Try
             ' NUM-KEY LOCK TOGGGLES CROSS HAIR DOT
             If pauseDrawing = False And KeyboardHook.IsKeyToggled(Keys.NumLock) = True And Me.Visible Then
-                'baseColorInnerFill = Color.FromArgb(eclipseBrushOpacity, eclipseBrush.Color)
                 Using g As Graphics = Graphics.FromHwnd(IntPtr.Zero)
                     Try
-                        'Dim bm As Bitmap = New Bitmap(Me.ClientRectangle.Width, Me.ClientRectangle.Height, Imaging.PixelFormat.Format32bppArgb)
                         Dim bm As Bitmap = New Bitmap(eclipseDiameter + (lineWidth * 5), eclipseDiameter + (lineWidth * 5), Imaging.PixelFormat.Format32bppArgb)
                         Try
                             'If bitmapXHair Is Nothing Then
@@ -1545,8 +1674,6 @@ GotoDrawNum:
                                 End If
 
                                 ' SET IMAGE SETTINGS
-                                'Dim Drawrush As Brush = Brushes.Transparent
-                                'gClone.FillRectangle(Drawrush, 0, 0, bm.Width, bm.Height)
                                 gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                                 gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                                 gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
@@ -1554,12 +1681,7 @@ GotoDrawNum:
                                 gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
 
                                 eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
-                                If baseColorInnerFill(colorIndexFill).A > 0 Then
-                                    eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                                Else
-                                    eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
-                                End If
-
+                                eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
                                 gClone.FillEllipse(eclipseBrush, lineWidth / 2, lineWidth / 2, CSng(eclipseDiameter - lineWidth / 2), CSng(eclipseDiameter - lineWidth / 2))
                                 ' DRAW BLACK CIRCLE AROUND CENTER DOT
                                 eclipsePen.Width = lineWidth
@@ -1576,7 +1698,6 @@ GotoDrawNum:
                                     If baseColorInnerFill(colorIndexFill).A <= 0 Then
                                         penCrossHairs = New Pen(eclipsePen.Color, 1)
                                     End If
-                                    'penCrossHairs.Width = 2
                                     ' HORIZONTAL LINE
                                     pts.Add(New PointF(CSng(lineWidth / 2), CSng((eclipseDiameter))))
                                     pts.Add(New PointF(CSng((eclipseDiameter)), CSng((eclipseDiameter))))
@@ -1629,18 +1750,14 @@ GotoDrawNum:
                 Me.BringToFront()
                 If Not Me.Visible Then Me.Show()
                 If Not Me.TopMost = True Then Me.TopMost = True
-                'Me.Show()
-                'Me.TopMost = True
                 If numLockPrevious = False Then
                     numLockPrevious = KeyboardHook.IsKeyToggled(Keys.NumLock)
-                    'Win32Helper.NotifyFileAssociationChanged()
                 End If
                 Try
                     Dim query As New sm.SelectQuery("Win32_VideoController")
                     For Each mo As sm.ManagementObject In New sm.ManagementObjectSearcher(query).Get
                         Dim CurrentRefreshRate As Object = mo("CurrentRefreshRate")
                         If CurrentRefreshRate IsNot Nothing Then
-                            'MessageBox.Show(String.Concat("Refresh = ", CurrentRefreshRate.ToString))
                             If IsNumeric(CurrentRefreshRate) Then
                                 refreshRate = CSng(CurrentRefreshRate)
                                 Exit For
@@ -1651,8 +1768,6 @@ GotoDrawNum:
                     refreshRate = 59
                     Err.Clear()
                 Finally
-                    'aTimer.Interval = 1
-                    'aTimer.Enabled = False
                     aTimer.Interval = CInt(CInt(1000 / refreshRate))  'ms '(1000ms / 60hz)
                     aTimer.AutoReset = True
                     If DoEvents_Wait(aTimer.Interval, dtSave) Then
@@ -1667,8 +1782,8 @@ GotoDrawNum:
                 'End If
             Else
                 numLockPrevious = KeyboardHook.IsKeyToggled(Keys.NumLock)
-                Me.TopMost = False
-                Me.SendToBack()
+                'Me.TopMost = False
+                'Me.SendToBack()
             End If
             aTimer.Enabled = KeyboardHook.IsKeyToggled(Keys.NumLock)
             'If Timer1.Enabled Then
@@ -1683,7 +1798,6 @@ GotoDrawNum:
     'bitmapXHair, setBitmapImageXHair
     Public Sub setBitmapImageXHair() 'As System.Drawing.Bitmap
         Dim bm As Bitmap = New Bitmap(eclipseDiameter + (lineWidth * 5), eclipseDiameter + (lineWidth * 5), Imaging.PixelFormat.Format32bppArgb)
-        'Dim bm As Bitmap = New Bitmap(Me.ClientRectangle.Width, Me.ClientRectangle.Height, Imaging.PixelFormat.Format32bppArgb)
         Try
             Using gClone As Graphics = Graphics.FromImage(bm)
                 gClone.Clear(Color.Transparent)
@@ -1694,8 +1808,6 @@ GotoDrawNum:
                 End If
 
                 ' SET IMAGE SETTINGS
-                'Dim Drawrush As Brush = Brushes.Transparent
-                'gClone.FillRectangle(Drawrush, 0, 0, bm.Width, bm.Height)
                 gClone.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
                 gClone.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
                 gClone.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
@@ -1703,12 +1815,7 @@ GotoDrawNum:
                 gClone.CompositingMode = Drawing2D.CompositingMode.SourceOver
 
                 eclipsePen = New Pen(baseColorOuterRing(colorIndexPen))
-                If baseColorInnerFill(colorIndexFill).A > 0 Then
-                    eclipseBrush = New SolidBrush(Color.FromArgb(eclipseBrushOpacity, baseColorInnerFill(colorIndexFill)))
-                Else
-                    eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
-                End If
-
+                eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
                 ' DRAW SOLID CIRCLE IN CENTER OF SCREEN
                 gClone.FillEllipse(eclipseBrush, lineWidth * 3, lineWidth * 3, CSng(eclipseDiameter - lineWidth * 3), CSng(eclipseDiameter - lineWidth * 3))
                 ' DRAW BLACK CIRCLE AROUND CENTER DOT
@@ -1726,23 +1833,14 @@ GotoDrawNum:
                     If baseColorInnerFill(colorIndexFill).A <= 0 Then
                         penCrossHairs = New Pen(eclipsePen.Color, 1)
                     End If
-                    'penCrossHairs.Width = 2
                     ' HORIZONTAL LINE
                     pts.Add(New PointF(CSng(lineWidth / 2), CSng((eclipseDiameter) - lineWidth / 2)))
                     pts.Add(New PointF(CSng((eclipseDiameter) - lineWidth / 2), CSng((eclipseDiameter) - lineWidth / 2)))
                     ' VERTICAL LINE
                     pts.Add(New PointF(CSng((eclipseDiameter) - lineWidth / 2), CSng(lineWidth / 2)))
                     pts.Add(New PointF(CSng((eclipseDiameter) - lineWidth / 2), CSng((eclipseDiameter) - lineWidth / 2)))
-                    'gClone.DrawLine(penCrossHairs, pts(0), pts(1))
-                    'gClone.DrawLine(penCrossHairs, pts(2), pts(3))
                     gClone.DrawLine(penCrossHairs, New PointF(pts(0).X, CSng((eclipseDiameter) / 2)), New PointF(pts(1).X, CSng((eclipseDiameter) / 2)))
                     gClone.DrawLine(penCrossHairs, New PointF(CSng((eclipseDiameter) / 2), pts(2).Y), New PointF(CSng((eclipseDiameter) / 2), pts(3).Y))
-                    'For x1 As Integer = pts(0).X To pts(1).X
-                    '    bm.SetPixel(x1, CSng((eclipseDiameter) / 2), penCrossHairs.Color)
-                    'Next
-                    'For y1 As Integer = pts(2).Y To pts(3).Y
-                    '    bm.SetPixel(CSng((eclipseDiameter) / 2), y1, penCrossHairs.Color)
-                    'Next
                     Dim ptCenter As New PointF(CSng((eclipseDiameter) / 2), CSng((eclipseDiameter) / 2))
                     If penCrossHairs.Color = Color.Transparent Then
                         bm.SetPixel(ptCenter.X, ptCenter.Y, Color.Black)
@@ -1763,22 +1861,13 @@ GotoDrawNum:
     End Sub
 
     Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        'Dim blnTest As Boolean = True
-        'If True = True Then
-        '    blnTest = False
-        'End If
+
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
-        'Dim blnTest As Boolean = True
-        'If True = True Then
-        '    blnTest = False
-        'End If
     End Sub
 
     Private Sub Form1_MouseHover(sender As Object, e As EventArgs) Handles Me.MouseHover
-        'Me.Visible = False
-        'Me.Enabled = False
         Me.pauseDrawing = True
         drawOverlay(drawOverlayFullScreen)
     End Sub
@@ -1816,4 +1905,112 @@ GotoDrawNum:
         End Sub
 
     End Class
+    Public countDown As Integer = -1
+    Public Property countdownMax() As Integer
+        Get
+            Return CInt(GetSetting(Application.ProductName, "SETTINGS", "countdown", "10"))
+        End Get
+        Set(value As Integer)
+            SaveSetting(Application.ProductName, "SETTINGS", "countdown", value.ToString())
+        End Set
+    End Property
+    Public Property countdownText() As String
+        Get
+            Return CStr(GetSetting(Application.ProductName, "SETTINGS", "countdownText", "GO!"))
+        End Get
+        Set(value As String)
+            SaveSetting(Application.ProductName, "SETTINGS", "countdownText", value.ToString())
+        End Set
+    End Property
+    Public Sub countdownStart(Optional start As Integer = 20)
+        Try
+            If start <= 0 Then
+                start = countdownMax
+            End If
+            TimerCountdown.Interval = 1000
+            countDown = start
+            TimerCountdownGo.Stop()
+            TimerCountdown.Start()
+            refreshOverlay()
+        Catch ex As Exception
+            Err.Clear()
+        End Try
+    End Sub
+    Public Sub countdownStop()
+        Try
+            TimerCountdown.Stop()
+            TimerCountdownGo.Stop()
+            countDown = -1
+            refreshOverlay()
+        Catch ex As Exception
+            Err.Clear()
+        End Try
+    End Sub
+    Public Sub playAudioFile(filepath As String)
+        My.Computer.Audio.Play(filepath, AudioPlayMode.Background)
+    End Sub
+    Private Sub TimerCountdown_Tick(sender As Object, e As EventArgs) Handles TimerCountdown.Tick
+        Try
+            countDown = countDown - 1
+            If countDown <= 0 Then
+                TimerCountdown.Stop()
+                countDownGo = 5
+                TimerCountdownGo.Start()
+                countDown = -1
+                TimerCountdown.Interval = 1000
+            Else
+                If countDown <= 5 Then
+                    'Beep()
+                    playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-click.wav")
+                End If
+                If countDown = 1 Then
+                        TimerCountdown.Interval = 500
+                        TimerCountdownGo.Interval = 500
+                    End If
+                End If
+        Catch ex As Exception
+            Err.Clear()
+        Finally
+            refreshOverlay()
+        End Try
+    End Sub
+    Public countDownTextTemp As String = ""
+    Public countDownGo As Integer = 5
+    Private Sub TimerCountdownGo_Tick(sender As Object, e As EventArgs) Handles TimerCountdownGo.Tick
+        Try
+            TimerCountdown.Stop()
+            TimerCountdownGo.Interval = 500
+            countDownGo -= 1
+            If countDownGo = 4 Or countDownGo = 2 Or countDownGo = 0 Then
+                countDownTextTemp = countdownText
+                'Beep()
+                If countDownGo = 4 Then
+                    playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-horns.wav")
+                End If
+            ElseIf countDownGo >= 0 Then
+                countDownTextTemp = ""
+            Else
+                countDownTextTemp = ""
+                TimerCountdownGo.Stop()
+                countDownGo = 5
+            End If
+        Catch ex As Exception
+            Err.Clear()
+        Finally
+            refreshOverlay()
+        End Try
+    End Sub
+    Public Sub refreshOverlay()
+        Dim pd As Boolean = pauseDrawing
+        Try
+            pauseDrawing = False
+            bitmapXHair = Nothing
+            clearCanvas()
+            drawOverlay(drawOverlayFullScreen)
+        Catch ex As Exception
+            Err.Clear()
+        Finally
+            pauseDrawing = pd
+        End Try
+    End Sub
 End Class
