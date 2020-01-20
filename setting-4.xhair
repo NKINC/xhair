@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Setting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <presetIndex>1</presetIndex>
+  <offsetX>0</offsetX>
+  <offsetY>0</offsetY>
+  <drawXHair>false</drawXHair>
+  <drawXHairRotateAngle>0</drawXHairRotateAngle>
+  <eclipseDiameter>18</eclipseDiameter>
+  <lineWidth>0.25</lineWidth>
+  <lineWidthArc>0.25</lineWidthArc>
+  <refreshRate>143</refreshRate>
+  <timerInterval>100</timerInterval>
+  <eclipseBrushOpacity>0</eclipseBrushOpacity>
+  <colorIndexFill>12</colorIndexFill>
+  <colorIndexPen>1</colorIndexPen>
+  <imgfilePath />
+  <imageSavePath>F:\Data\PROGRAMMING\VS.Net\2017\Crosshair\crosshair\xhair\bin\Release\</imageSavePath>
+  <settingName />
+</Setting>
