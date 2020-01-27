@@ -84,9 +84,10 @@ Public Class Form1
         Timer1.Interval = 100 'CInt(1000 / refreshRate) 'ms '(1000ms / 60hz)
         timerInterval = Timer1.Interval
         eclipseBrushOpacity = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString()))
-        imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString()))
+        imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", imageSavePath.ToString()))
         colorIndexFill = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString()))
         colorIndexPen = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString()))
+        countdownAlarmPath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "countdownAlarmPath", countdownAlarmPath.ToString()))
         eclipsePen = New Pen(Color.FromArgb(eclipseBrushOpacity, baseColorOuterRing(colorIndexPen)))
         eclipseBrush = New SolidBrush(baseColorInnerFill(colorIndexFill))
         bitmapXHair = Nothing
@@ -109,9 +110,10 @@ Public Class Form1
         s.imgfilePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imgfilePath", ""))
         s.timerInterval = Timer1.Interval
         s.eclipseBrushOpacity = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString()))
-        s.imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString()))
+        s.imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", imageSavePath.ToString()))
         s.colorIndexFill = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString()))
         s.colorIndexPen = CInt(GetSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString()))
+        s.countdownAlarmPath = CStr(GetSetting(Application.ProductName, "SETTINGS" & settingName, "countdownAlarmPath", countdownAlarmPath.ToString()))
     End Function
     Public indexPreset As Integer = 0
     Public Sub settingSave(Optional settingName As String = "")
@@ -131,9 +133,10 @@ Public Class Form1
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "timerInterval", timerInterval.ToString())
         eclipseBrushOpacity = eclipseBrush.Color.A
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "eclipseBrushOpacity", eclipseBrushOpacity.ToString())
-        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "imageSavePath", imageSavePath.ToString())
+        SaveSetting(Application.ProductName, "SETTINGS", "imageSavePath", imageSavePath.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexFill", colorIndexFill.ToString())
         SaveSetting(Application.ProductName, "SETTINGS" & settingName, "colorIndexPen", colorIndexPen.ToString())
+        SaveSetting(Application.ProductName, "SETTINGS" & settingName, "countdownAlarmPath", countdownAlarmPath.ToString())
         clearCanvas()
         bitmapXHair = Nothing
         pauseDrawing = pauseTemp
@@ -173,7 +176,8 @@ Public Class Form1
         Try
             bitmapXHair = Nothing
             clearCanvas()
-            imageSavePath = Application.StartupPath.ToString().TrimEnd("\"c) & "\"c
+            'imageSavePath = Application.StartupPath.ToString().TrimEnd("\"c) & "\"c
+            imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"))
             baseColorInnerFill = fillColorList(baseColorInnerFill)
             baseColorOuterRing = fillColorList(baseColorOuterRing)
         Catch ex As Exception
@@ -369,6 +373,7 @@ Public Class Form1
                 pauseDrawing = True
                 If DoEvents_Wait(CInt(1000 / refreshRate)) Then
                     Dim frmSettings As New DialogSettings(Me)
+                    imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"))
                     frmSettings.loadSettingsFromForm(False)
                     frmSettings.ownerForm = Me
                     Try
@@ -1955,19 +1960,20 @@ GotoDrawNum:
             If countDown <= 0 Then
                 TimerCountdown.Stop()
                 countDownGo = 5
+                TimerCountdownGo.Interval = 400
                 TimerCountdownGo.Start()
                 countDown = -1
                 TimerCountdown.Interval = 1000
             Else
-                If countDown <= 5 Then
+                If countDown <= 10 Then
                     'Beep()
                     playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-click.wav")
                 End If
                 If countDown = 1 Then
-                        TimerCountdown.Interval = 500
-                        TimerCountdownGo.Interval = 500
-                    End If
+                    TimerCountdown.Interval = 500
+                    'TimerCountdownGo.Interval = 500
                 End If
+            End If
         Catch ex As Exception
             Err.Clear()
         Finally
@@ -1976,16 +1982,26 @@ GotoDrawNum:
     End Sub
     Public countDownTextTemp As String = ""
     Public countDownGo As Integer = 5
+    Public countdownAlarmPath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\sound-horns.wav"
     Private Sub TimerCountdownGo_Tick(sender As Object, e As EventArgs) Handles TimerCountdownGo.Tick
         Try
             TimerCountdown.Stop()
             TimerCountdownGo.Interval = 500
             countDownGo -= 1
-            If countDownGo = 4 Or countDownGo = 2 Or countDownGo = 0 Then
+            'If countDownGo = 4 Or countDownGo = 2 Or countDownGo = 0 Then
+            If countDownGo Mod 2 = 0 Or countDownGo = 0 Then
                 countDownTextTemp = countdownText
                 'Beep()
                 If countDownGo = 4 Then
-                    playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-horns.wav")
+                    If Not String.IsNullOrEmpty(countdownAlarmPath & "") Then
+                        If System.IO.File.Exists(countdownAlarmPath) Then
+                            playAudioFile(countdownAlarmPath)
+                        Else
+                            playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-horns.wav")
+                        End If
+                    Else
+                        playAudioFile(Application.StartupPath.ToString.TrimEnd("\"c) & "\" & "sound-horns.wav")
+                    End If
                 End If
             ElseIf countDownGo >= 0 Then
                 countDownTextTemp = ""

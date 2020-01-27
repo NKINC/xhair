@@ -13,7 +13,7 @@ Public Class DialogSettings
     End Sub
     Public Sub refreshPicturebox()
         Try
-            Dim bm As Bitmap = ownerForm.getOverlay(True, getSetting())
+            Dim bm As Bitmap = ownerForm.getOverlay(True, getSettings())
             If bm.Width > PictureBox3.ClientSize.Width OrElse bm.Height > PictureBox3.ClientSize.Height Then
                 PictureBox3.SizeMode = PictureBoxSizeMode.Zoom 'if image is larger than picturebox
             Else
@@ -86,6 +86,7 @@ Public Class DialogSettings
     Public colorIndexPen As Integer = 0
     Public imgfilePath As String = ""
     Public imageSavePath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"
+    Public countdownAlarmPath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\sound-horns.wav"
     Public settings As New List(Of Setting)
     <Serializable()>
     Public Class Setting
@@ -111,6 +112,7 @@ Public Class DialogSettings
 
 
         Public imageSavePath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"
+        Public countdownAlarmPath As String = Application.StartupPath.ToString.TrimEnd("\"c) & "\sound-horns.wav"
         Public settingName As String = ""
 
         Public Sub New()
@@ -129,11 +131,12 @@ Public Class DialogSettings
             colorIndexFill = 0
             colorIndexPen = 0
             imgfilePath = ""
-            imageSavePath = Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"
+            imageSavePath = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", Application.StartupPath.ToString.TrimEnd("\"c) & "\screencapture-"))
             settingName = ""
+            countdownAlarmPath = Application.StartupPath.ToString.TrimEnd("\"c) & "\sound-horns.wav"
         End Sub
 
-        Public Sub New(settingName1 As String, presetIndex1 As Integer, offsetX1 As Integer, offsetY1 As Integer, drawXHairRotateAngle1 As Single, eclipseDiameter1 As Single, lineWidth1 As Single, lineWidthArc1 As Single, refreshRate1 As Single, timerInterval1 As Single, eclipseBrushOpacity1 As Integer, colorIndexFill1 As Integer, colorIndexPen1 As Integer, imageSavePath1 As String, colorBaseColorInnerFill1 As Color, colorBaseColorOuterRing1 As Color, drawXHair1 As Boolean, imgfilePath1 As String)
+        Public Sub New(settingName1 As String, presetIndex1 As Integer, offsetX1 As Integer, offsetY1 As Integer, drawXHairRotateAngle1 As Single, eclipseDiameter1 As Single, lineWidth1 As Single, lineWidthArc1 As Single, refreshRate1 As Single, timerInterval1 As Single, eclipseBrushOpacity1 As Integer, colorIndexFill1 As Integer, colorIndexPen1 As Integer, imageSavePath1 As String, colorBaseColorInnerFill1 As Color, colorBaseColorOuterRing1 As Color, drawXHair1 As Boolean, imgfilePath1 As String, countdownAlarmPath1 As String)
             'ownerForm = Nothing
             settingName = settingName
             presetIndex = presetIndex1
@@ -151,6 +154,7 @@ Public Class DialogSettings
             colorIndexPen = colorIndexPen1
             imgfilePath = imgfilePath1
             imageSavePath = imageSavePath1
+            countdownAlarmPath = countdownAlarmPath1
         End Sub
     End Class
     Public Sub New()
@@ -226,7 +230,7 @@ Public Class DialogSettings
         TrackBar2.Value = CInt(TextBox10.Text)
         TrackBar3.Value = CInt(TextBox11.Text)
         CheckBox1.Checked = drawXHair
-
+        TextBox14.Text = countdownAlarmPath & ""
         Try
             If Not ownerForm Is Nothing Then
                 PictureBox1.BackColor = ownerForm.baseColorInnerFill(CInt(TrackBar2.Value))
@@ -260,6 +264,7 @@ Public Class DialogSettings
             TrackBar2.Value = CInt(TextBox10.Text)
             TrackBar3.Value = CInt(TextBox11.Text)
             CheckBox1.Checked = s.drawXHair
+            TextBox14.Text = s.countdownAlarmPath & ""
             If Not ownerForm Is Nothing Then
                 PictureBox1.BackColor = ownerForm.baseColorInnerFill(CInt(TrackBar2.Value))
                 PictureBox2.BackColor = ownerForm.baseColorOuterRing(CInt(TrackBar3.Value))
@@ -268,7 +273,7 @@ Public Class DialogSettings
             Err.Clear()
         End Try
     End Sub
-    Public Function getSetting() As Setting
+    Public Function getSettings() As Setting
         Dim s As New Setting
         s.presetIndex = TextBoxPresetIndex.Text
         s.offsetX = TextBox1.Text
@@ -336,7 +341,8 @@ Public Class DialogSettings
             TextBox9.Text = ownerForm.eclipseBrushOpacity
             TextBox10.Text = ownerForm.colorIndexFill
             TextBox11.Text = ownerForm.colorIndexPen
-            TextBox12.Text = ownerForm.imageSavePath
+            'TextBox12.Text = ownerForm.imageSavePath
+            TextBox12.Text = CStr(GetSetting(Application.ProductName, "SETTINGS", "imageSavePath", ownerForm.imageSavePath.ToString()))
             TextBox13.Text = ownerForm.imgfilePath
             TrackBar2.Maximum = ownerForm.baseColorInnerFill.Count - 1
             TrackBar3.Maximum = ownerForm.baseColorOuterRing.Count - 1
@@ -344,6 +350,7 @@ Public Class DialogSettings
             TrackBar2.Value = CInt(TextBox10.Text)
             TrackBar3.Value = CInt(TextBox11.Text)
             CheckBox1.Checked = ownerForm.drawXHair
+            TextBox14.Text = ownerForm.countdownAlarmPath & ""
             Try
                 If Not ownerForm Is Nothing Then
                     PictureBox1.BackColor = ownerForm.baseColorInnerFill(CInt(TrackBar2.Value))
@@ -381,6 +388,7 @@ Public Class DialogSettings
         imageSavePath = TextBox12.Text
         imgfilePath = TextBox13.Text
         drawXHair = CheckBox1.Checked
+        countdownAlarmPath = TextBox14.Text & ""
     End Sub
     Public Sub saveSettingsToForm()
         Try
@@ -398,8 +406,10 @@ Public Class DialogSettings
                 ownerForm.colorIndexFill = CInt(TextBox10.Text)
                 ownerForm.colorIndexPen = CInt(TextBox11.Text)
                 ownerForm.imageSavePath = CStr(TextBox12.Text)
+                SaveSetting(Application.ProductName, "SETTINGS", "imageSavePath", CStr(TextBox12.Text))
                 ownerForm.imgfilePath = CStr(TextBox13.Text)
                 ownerForm.drawXHair = CheckBox1.Checked
+                ownerForm.countdownAlarmPath = TextBox14.Text & ""
                 If ownerForm.indexPreset > 0 Then
                     ownerForm.settingSave(CStr("_" + presetIndex.ToString()))
                     If KeyboardHook.IsKeyToggled(Keys.NumLock) = True Then
@@ -430,7 +440,8 @@ Public Class DialogSettings
             End If
             Select Case FolderBrowserDialog1.ShowDialog(Me)
                 Case DialogResult.Yes, DialogResult.OK
-                    TextBox12.Text = FolderBrowserDialog1.SelectedPath
+                    TextBox12.Text = FolderBrowserDialog1.SelectedPath.ToString.TrimEnd("\"c) & "\"
+                    SaveSetting(Application.ProductName, "SETTINGS", "imageSavePath", TextBox12.Text)
             End Select
         Catch ex As Exception
             Err.Clear()
@@ -633,7 +644,7 @@ Public Class DialogSettings
                 Select Case fs.ShowDialog(Me)
                     Case DialogResult.Yes, DialogResult.OK
                         fp = fs.FileName
-                        Dim s As Setting = getSetting()
+                        Dim s As Setting = getSettings()
                         Dim xml_serializer As New System.Xml.Serialization.XmlSerializer(GetType(Setting))
                         Dim streamMem As New System.IO.MemoryStream
                         xml_serializer.Serialize(streamMem, s)
@@ -700,5 +711,35 @@ Public Class DialogSettings
         Catch ex As Exception
             Err.Clear()
         End Try
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Try
+            Dim fod As New OpenFileDialog
+            If Not String.IsNullOrEmpty(TextBox14.Text & "") Then
+                If System.IO.File.Exists(TextBox14.Text) Then
+                    fod.InitialDirectory = (CStr(System.IO.Path.GetDirectoryName(TextBox14.Text)))
+                    fod.FileName = CStr(System.IO.Path.GetFileName(TextBox14.Text))
+                Else
+                    GoTo Goto_DefaultPath
+                End If
+            Else
+Goto_DefaultPath:
+                fod.InitialDirectory = (CStr(Application.StartupPath.ToString().TrimEnd("\"c) & "\"))
+                fod.FileName = CStr("sound-horns.wav")
+            End If
+            Select Case fod.ShowDialog(Me)
+                Case DialogResult.Yes, DialogResult.OK
+                    TextBox14.Text = fod.FileName
+                Case Else
+                    TextBox14.Text = ""
+            End Select
+        Catch ex As Exception
+            Err.Clear()
+        End Try
+    End Sub
+
+    Private Sub TextBox12_TextChanged(sender As Object, e As EventArgs) Handles TextBox12.TextChanged
+
     End Sub
 End Class
